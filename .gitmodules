@@ -1,0 +1,12 @@
+[submodule "evercam_api"]
+	path = evercam_api
+	url = git@github.com:evercam/evercam_api.git
+[submodule "evercam_dashboard"]
+	path = evercam_dashboard
+	url = git@github.com:evercam/evercam_dashboard.git
+[submodule "evercam_models"]
+	path = evercam_models
+	url = git@github.com:evercam/evercam_models.git
+[submodule "evercam-ruby"]
+	path = evercam-ruby
+	url = git@github.com:evercam/evercam-ruby.git

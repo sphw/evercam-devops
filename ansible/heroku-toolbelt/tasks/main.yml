@@ -1,0 +1,17 @@
+- name: install heroku apt key
+  apt_key: url='https://toolbelt.heroku.com/apt/release.key' state=present
+
+- name: install heroku apt repo
+  apt_repository: repo='deb http://toolbelt.heroku.com/ubuntu ./'
+                  state=present
+                  update_cache=yes
+
+- name: install heroku-toolbelt
+  apt: name=heroku-toolbelt state=present
+
+- name: create heroku credentials file
+  template: src=dotnetrc.j2
+            dest=/home/{{user_name}}/.netrc
+            owner={{user_name}}
+            group={{user_name}}
+            mode=0600

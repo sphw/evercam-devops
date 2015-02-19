@@ -1,0 +1,15 @@
+- name: Update apt cache
+  action: apt update_cache=yes
+
+- name: Install dependencies
+  action: apt pkg={{item}} state=latest
+  with_items:
+    - curl
+    - git
+    - make
+    - nodejs
+    - python
+    - python-pycurl
+    - python-psycopg2
+    - python-software-properties
+    - libpq-dev
