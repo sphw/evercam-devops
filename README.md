@@ -7,10 +7,12 @@
 * [Python](https://www.python.org/downloads/)
 * [Git](http://git-scm.com/downloads)
 
-#### Clone this repository
+#### Clone this repository and it's submodules
 
 ```
 git clone git@github.com:evercam/devops.git && cd devops
+git pull && git submodule init && git submodule update && git submodule status
+git submodule foreach --recursive git checkout master
 ```
 
 #### Install Ansible dependencies
