@@ -1,0 +1,4 @@
+user_name: vagrant
+local_media_dir: ~/evercam/media
+remote_media_dir: /tmp/evercam_media
+version_to_deploy: "{{VERSION|default('master')}}"

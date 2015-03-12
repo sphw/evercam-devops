@@ -1,0 +1,21 @@
+- hosts: all
+  user: "{{user_name}}"
+  # sudo: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Check if Elixir release directory exists  
+      stat: path={{remote_media_dir}}
+      register: release_exists
+    
+    - include: media/tasks/cleanup.yml
+      
+    - include: media/tasks/bootstrap.yml
+      when: release_exists.stat.exists == False
+      
+    - include: media/tasks/start.yml
+      
+    - include: media/tasks/upgrade.yml
+      when: release_exists.stat.exists == True
+      
+    - include: media/tasks/cleanup.yml
