@@ -1,6 +1,5 @@
 - hosts: all
   user: "{{user_name}}"
-  # sudo: yes
   vars_files:
     - vars.yml
   tasks:
