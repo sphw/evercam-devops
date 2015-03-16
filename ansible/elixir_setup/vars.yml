@@ -1,4 +1,19 @@
 user_name: vagrant
 local_media_dir: ~/evercam/media
-remote_media_dir: /tmp/evercam_media
+remote_media_dir: ~/evercam_media
 version_to_deploy: "{{VERSION|default('master')}}"
+
+nginx_pid: "/var/run/nginx.pid"
+
+nginx_source_version: "1.7.10"
+nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.gz"
+
+nginx_rtmp_version: "1.1.6"
+nginx_rtmp_url: "https://github.com/arut/nginx-rtmp-module/archive/v{{nginx_rtmp_version}}.tar.gz"
+
+source_dir: "/usr/local/src"
+lib_dir: "/usr/local/lib"
+bin_dir: "/usr/local/bin"
+
+media_env_vars: "{% for key, value in env_vars.items() %}{{value}} {% endfor %}"
+mix_env_vars: "MIX_ENV=prod PORT=4000"

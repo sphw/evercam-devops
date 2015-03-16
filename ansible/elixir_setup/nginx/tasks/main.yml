@@ -1,0 +1,27 @@
+- name: Make sure the Nginx build dependencies are installed
+  sudo: yes
+  apt:
+    pkg: "{{item}}"
+    state: present
+  with_items:
+    - libpcre3
+    - libpcre3-dev
+    - libssl-dev
+
+- name: Check nginx version
+  shell: /usr/local/nginx/sbin/nginx -v 2>&1 | sed -e 's#^.*/##'
+  register: nginx_register_version
+  changed_when: False
+
+- name: Define nginx version
+  set_fact:
+    nginx_version: '{{ nginx_register_version.stdout | default("0.0") }}'
+
+- include: install.yml
+  when: nginx_version != nginx_source_version
+
+- name: Ensure Nginx is running
+  service: name=nginx state=started
+  register: var1
+  sudo: yes
+- debug: var=var1

@@ -22,7 +22,7 @@ sudo pip install ansible
 sudo ansible-galaxy install -r ansible/requirements.yml --force
 ```
 
-#### Create a `private_vars.yml` file and fill it in with your information
+#### Create a `private_vars_devops.yml` file and fill it in with your information
 
 ```
 heroku_login: "heroku_login"

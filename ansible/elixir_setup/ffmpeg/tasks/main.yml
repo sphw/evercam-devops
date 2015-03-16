@@ -1,0 +1,8 @@
+- name: Check FFMPEG version
+  shell: ffmpeg -version 2>&1
+  register: ffmpeg_installed
+  failed_when: False
+
+- include: install.yml
+  when: ffmpeg_installed.rc != 0
+  sudo: True

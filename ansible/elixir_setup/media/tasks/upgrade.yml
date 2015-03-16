@@ -1,7 +1,7 @@
 - name: Register version of Elixir server in production
   shell: cat {{remote_media_dir}}/releases/start_erl.data | awk '{print $2}'
   register: current_media_version
-- debug: var=current_media_version.stdout  
+  changed_when: False
 
 - name: Checkout current version of Elixir server
   local_action:
@@ -11,28 +11,27 @@
 
 - name: Build current version of Elixir server
   local_action:
-    command
+    shell
     chdir={{local_media_dir}}
-    mix release
-    
+    {{mix_env_vars}} mix release
+
 - name: Checkout new version of Elixir server
   local_action:
     command
     chdir={{local_media_dir}}
     git checkout {{version_to_deploy}}
-    
+
 - name: Build new version of Elixir server
   local_action:
-    command
+    shell
     chdir={{local_media_dir}}
-    mix release
- 
+    {{mix_env_vars}} mix release
+
 - name: Register new version of Elixir server
   local_action:
     shell
     cat {{local_media_dir}}/rel/media/releases/start_erl.data | awk '{print $2}'
   register: new_media_version
-- debug: var=new_media_version.stdout
 
 - name: Ensure there is a directory for the new version
   file: path="{{remote_media_dir}}/releases/{{new_media_version.stdout}}" state=directory
@@ -43,14 +42,12 @@
     dest: "{{remote_media_dir}}/releases/{{new_media_version.stdout}}/media.tar.gz"
 
 - name: Upgrade production server to the new version
-  command: "{{remote_media_dir}}/bin/media upgrade {{new_media_version.stdout}}"
+  shell: "{{media_env_vars}} {{remote_media_dir}}/bin/media upgrade {{new_media_version.stdout}}"
   register: upgrade_message
   changed_when: "'already installed' not in upgrade_message.stdout"
-- debug: var=upgrade_message.stdout
-  
-- name: Ensure newest version is running 
+
+- name: Ensure newest version is running
   shell: cat {{remote_media_dir}}/releases/start_erl.data | awk '{print $2}'
   register: final_version
   failed_when: final_version.stdout != new_media_version.stdout
   changed_when: final_version.stdout != current_media_version.stdout
-- debug: var=final_version.stdout  
