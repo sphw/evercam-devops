@@ -1,0 +1,11 @@
+- name: Copy SSL .pem file
+  sudo: yes
+  copy:
+    src: "media_evercam_io.pem"
+    dest: "/etc/ssl/media_evercam_io.pem"
+
+- name: Copy SSL .key file
+  sudo: yes
+  copy:
+    src: "media_evercam_io.key"
+    dest: "/etc/ssl/media_evercam_io.key"
