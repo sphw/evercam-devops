@@ -3,11 +3,16 @@
   register: current_media_version
   changed_when: False
 
+- name: Register git ref of Elixir server in production
+  shell: cat {{remote_media_dir}}/releases/start_erl.data | awk '{print $2}' | tail -c 8
+  register: current_git_media_version
+  changed_when: False
+
 - name: Checkout current version of Elixir server
   local_action:
     command
     chdir={{local_media_dir}}
-    git checkout {{current_media_version.stdout}}
+    git checkout {{current_git_media_version.stdout}}
 
 - name: Build current version of Elixir server
   local_action:
