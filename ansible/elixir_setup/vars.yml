@@ -11,6 +11,9 @@ nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.
 nginx_rtmp_version: "1.1.6"
 nginx_rtmp_url: "https://github.com/arut/nginx-rtmp-module/archive/v{{nginx_rtmp_version}}.tar.gz"
 
+nginx_more_headers_version: "0.25"
+nginx_more_headers_url: "https://github.com/openresty/headers-more-nginx-module/archive/v{{nginx_more_headers_version}}.tar.gz"
+
 source_dir: "/usr/local/src"
 lib_dir: "/usr/local/lib"
 bin_dir: "/usr/local/bin"
