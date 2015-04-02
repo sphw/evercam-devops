@@ -1,4 +1,4 @@
-user_name: vagrant
+user_name: "{{ansible_ssh_user}}"
 local_media_dir: ~/evercam/media
 remote_media_dir: ~/evercam_media
 version_to_deploy: "{{VERSION|default('master')}}"

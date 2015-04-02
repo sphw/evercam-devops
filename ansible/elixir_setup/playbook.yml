@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: "{{target}}"
   gather_facts: False
   user: "{{user_name}}"
   vars_files:

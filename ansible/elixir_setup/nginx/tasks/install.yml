@@ -29,7 +29,7 @@
     make &&
     sudo make install
 
-- name: Nginx | Install the upstart init script
+- name: Install the upstart init script
   sudo: yes
   template:
     src: nginx.init.j2

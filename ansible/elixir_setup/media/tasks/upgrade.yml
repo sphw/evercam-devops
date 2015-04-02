@@ -18,7 +18,7 @@
   local_action:
     shell
     chdir={{local_media_dir}}
-    {{mix_env_vars}} mix release
+    {{mix_env_vars}} mix do deps.get, release
 
 - name: Checkout new version of Elixir server
   local_action:
@@ -30,7 +30,7 @@
   local_action:
     shell
     chdir={{local_media_dir}}
-    {{mix_env_vars}} mix release
+    {{mix_env_vars}} mix do deps.get, release
 
 - name: Register new version of Elixir server
   local_action:

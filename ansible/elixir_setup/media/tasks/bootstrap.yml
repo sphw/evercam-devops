@@ -8,7 +8,7 @@
   local_action:
     shell
     chdir={{local_media_dir}}
-    {{mix_env_vars}} mix release
+    {{mix_env_vars}} mix do deps.get, release
 
 - name: Check new version of Elixir server
   local_action:
@@ -24,5 +24,14 @@
     src="{{local_media_dir}}/rel/media/media-{{new_media_version.stdout}}.tar.gz"
     dest="{{remote_media_dir}}"
 
+- name: Install the evercam_media init script
+  sudo: yes
+  template:
+    src: evercam_media.conf.j2
+    dest: /etc/init/evercam_media.conf
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Start production server
-  shell: "{{media_env_vars}} {{remote_media_dir}}/bin/media start"
+  shell: sudo start evercam_media
