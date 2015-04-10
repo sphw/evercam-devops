@@ -24,6 +24,22 @@
     src="{{local_media_dir}}/rel/media/media-{{new_media_version.stdout}}.tar.gz"
     dest="{{remote_media_dir}}"
 
+- name: Start production server
+  shell: "{{media_env_vars}} {{remote_media_dir}}/bin/media start"
+
+- name: Ensure /usr/local/bin dir exists
+  file: path=/usr/local/bin state=directory
+  sudo: yes
+
+- name: Copy evercam_media run init script
+  sudo: yes
+  template:
+    src: run_evercam_media.sh.j2
+    dest: /usr/local/bin/run_evercam_media.sh
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Install the evercam_media init script
   sudo: yes
   template:

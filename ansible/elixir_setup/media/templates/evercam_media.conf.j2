@@ -15,4 +15,4 @@ env {{env_vars.aws_access_key}}
 env {{env_vars.aws_secret_key}}
 env {{env_vars.evercam_api}}
 
-exec watch -n1 '/home/{{user_name}}/evercam_media/bin/media start'
+exec watch -n1 '/usr/local/bin/run_evercam_media.sh'
