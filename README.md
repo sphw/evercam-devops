@@ -1,6 +1,6 @@
 ## Evercam Development Environment Setup
 
-#### Install Host dependencies 
+#### Install Host dependencies
 
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant](http://www.vagrantup.com/downloads.html)
@@ -29,6 +29,9 @@ heroku_login: "heroku_login"
 heroku_apikey: "heroku_apikey"
 aws_access_key: "aws_access_key"
 aws_secret_key: "aws_secret_key"
+threescale_provider_key: "threescale_key"
+stripe_publishable_key: "stripe_publishable_key"
+stripe_secret_key: "stripe_secret_key"
 ```
 
 #### Run Vagrant
