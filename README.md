@@ -29,14 +29,22 @@ cp .env evercam-models/
 vagrant up && vagrant ssh
 ```
 
-Grap a cup of your favorite beverage, this is going to take some time...
+Grab a cup of your favorite beverage, this is going to take some time...
+
+#### Type the password in console 
+
+```
+vagrant
+```
 
 #### Test that everything is working
 
 ```
 cd /vagrant/evercam-api
+bundle install
 bundle exec rspec
 cd /vagrant/evercam-dashboard
+bundle install
 bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
 ```
 
