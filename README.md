@@ -21,6 +21,7 @@ git submodule foreach --recursive git pull
 cp .env evercam-api/
 cp .env evercam-dashboard/
 cp .env evercam-models/
+cp .env evercam-media/
 ```
 
 #### Run Vagrant and ssh into the VM
@@ -31,7 +32,7 @@ vagrant up && vagrant ssh
 
 Grab a cup of your favorite beverage, this is going to take some time...
 
-#### Type the password in console 
+#### Type the password in console
 
 ```
 vagrant
