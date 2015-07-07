@@ -10,3 +10,6 @@
 [submodule "evercam-ruby"]
 	path = evercam-ruby
 	url = https://github.com/evercam/evercam-ruby.git
+[submodule "evercam-media"]
+	path = evercam-media
+	url = https://github.com/evercam/evercam-media
