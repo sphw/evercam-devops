@@ -45,9 +45,11 @@ cd /vagrant/evercam-api
 ./scripts/create
 bundle install
 bundle exec rspec
+
 cd /vagrant/evercam-dashboard
 bundle install
 bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
+
 cd /vagrant/evercam-media
 mix deps.get && mix deps.compile && mix compile
 mix test
