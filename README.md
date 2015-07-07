@@ -42,8 +42,9 @@ vagrant
 
 ```
 cd /vagrant/evercam-api
-./scripts/create
 bundle install
+fakes3 --root=/tmp/fakes3 --port=10453 &
+./scripts/create && bundle exec rake db:migrate && bundle exec rake db:seed
 bundle exec rspec
 
 cd /vagrant/evercam-dashboard
@@ -51,7 +52,7 @@ bundle install
 bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
 
 cd /vagrant/evercam-media
-mix deps.get && mix deps.compile && mix compile && mix evercam.seed
+mix deps.get && mix deps.compile && mix compile
 mix test
 ```
 
