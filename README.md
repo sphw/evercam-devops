@@ -51,7 +51,7 @@ bundle install
 bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
 
 cd /vagrant/evercam-media
-mix deps.get && mix deps.compile && mix compile
+mix deps.get && mix deps.compile && mix compile && mix evercam.seed
 mix test
 ```
 
