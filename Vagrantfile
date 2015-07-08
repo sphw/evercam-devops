@@ -9,9 +9,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 3000, host: 3000
+  config.vm.network :forwarded_port, guest: 4000, host: 4000
   config.vm.network :forwarded_port, guest: 9292, host: 9292
-  config.vm.network :forwarded_port, guest: 10453, host: 10453
-  config.vm.network :forwarded_port, guest: 11371, host: 11371
   config.vm.network :private_network, ip: '192.168.50.50'
 
   # Uncomment on Linux/OS X for performance improvements
