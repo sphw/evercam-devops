@@ -62,7 +62,7 @@ Now start the API server:
 
 ```
 cd /vagrant/evercam-api
-bundle exec rackup
+bundle exec rackup -o 0.0.0.0
 ```
 
 And in another terminal tab/window start the Dashboard server:
