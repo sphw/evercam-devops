@@ -1,0 +1,60 @@
+#!/bin/sh
+set -e
+
+#
+# This script is meant for quick & easy install via:
+#   'curl -sSL https://get.evercam.io/ | sh'
+# or:
+#   'wget -qO- https://get.evercam.io/ | sh'
+
+
+# Clone evercam-devops
+echo "Step 1: Downloading Evercam codebase..."
+git clone https://github.com/evercam/evercam-devops.git && cd evercam-devops
+git pull && git submodule init && git submodule update && git submodule status
+git submodule foreach --recursive git checkout master
+git submodule foreach --recursive git pull
+echo "Step 1: complete"
+
+# Get project dependencies for evercam-api
+echo "Step 2: Installing dependencies for evercam-api."
+cd evercam-api
+gem install vendor/cache/evercam_misc-0.0.10.gem
+gem install vendor/cache/evercam_models-0.3.18.gem
+bundle install
+cd ..
+
+# # Get project dependencies for evercam-dashboard
+echo "Step 3: Installing dependencies for evercam-dashboard."
+cd evercam-dashboard
+gem install vendor/cache/evercam_misc-0.0.9.gem
+gem install vendor/cache/evercam_models-0.3.14.gem
+bundle install
+cd ..
+
+# # Get project dependencies for evercam-media
+echo "Step 4: Installing dependencies for evercam-media"
+cd evercam-media
+mix do deps.get, compile
+cd ..
+
+# Settings up database
+echo "Step 5: Setting up of local database - evercam_dev"
+dropdb evercam_dev --if-exists
+createdb evercam_dev
+# pg_restore -v -x -O -d evercam_dev < db/schema.dump
+# pg_restore --disable-triggers -O -x -v -a -d evercam_dev < db/seed.dump
+psql -d evercam_dev < db/schema.psql
+psql -d evercam_dev < db/seed.psql
+
+echo "Step 6: Running database migrations if any"
+cd evercam-api
+bundle exec rake db:migrate
+cd ..
+
+echo "Step 7: Installing foreman"
+gem install foreman
+
+echo "Setup Complete."
+echo "Run `foreman start` to start evercam."
+echo "Visit http://localhost:3000"
