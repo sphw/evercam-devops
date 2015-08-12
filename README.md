@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/evercam/evercam-devops.png?label=ready&title=Ready)](https://waffle.io/evercam/evercam-devops)
 ## Evercam Development Environment Setup
 
 #### Install Host dependencies
