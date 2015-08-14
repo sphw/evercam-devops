@@ -2,7 +2,7 @@ evercam_api_dir: /vagrant/evercam-api
 evercam_dash_dir: /vagrant/evercam-dashboard
 
 rvm1_rubies:
-  - 'ruby-2.2.0'
+  - 'ruby-2.2.2'
 rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/{{ ansible_ssh_user }}/.rvm'
 rvm1_user: '{{ user_name }}'
