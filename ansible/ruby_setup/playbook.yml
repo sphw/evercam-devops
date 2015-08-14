@@ -7,6 +7,7 @@
     - ../../private_vars_devops.yml
   vars:
     - production: False
+    - user_name: vagrant
   roles:
     - deps
     - { role: "../elixir_setup/ffmpeg"}
