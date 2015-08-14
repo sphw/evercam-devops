@@ -8,6 +8,7 @@ Vagrant.configure(2) do |config|
   # config.vm.box_url = "https://dl.dropboxusercontent.com/s/nyx698gadrote0z/devops.box"
 
   config.vm.network :forwarded_port, guest: 80, host: 8888
+  config.vm.network :forwarded_port, guest: 1935, host: 1935
   config.vm.network :forwarded_port, guest: 3000, host: 3000
   config.vm.network :forwarded_port, guest: 4000, host: 4000
   config.vm.network :forwarded_port, guest: 9292, host: 9292
