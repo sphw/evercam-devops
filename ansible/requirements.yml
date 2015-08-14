@@ -2,3 +2,6 @@
 - src: ANXS.postgresql
 - src: DavidWittman.redis
 - src: geerlingguy.memcached
+- src: ohr486.elixir
+- src: debops.nodejs
+- src: nodesource.node

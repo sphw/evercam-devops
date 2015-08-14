@@ -1,11 +1,15 @@
 - hosts: all
-  user: "{{user_name}}"
+  user: vagrant
   sudo: yes
   vars_files:
     - vars.yml
     - ../../private_vars_devops.yml
   roles:
     - deps
+    - { role: "../elixir_setup/ffmpeg"}
+    - { role: "../elixir_setup/nginx"}
+    - { role: ohr486.elixir, erlang_version: 17.5, elixir_version: v1.0.4 }
+    - nodesource.node
     - heroku-toolbelt
     - rvm_io.rvm1-ruby
     - ANXS.postgresql

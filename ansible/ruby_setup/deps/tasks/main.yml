@@ -4,6 +4,7 @@
 - name: Install dependencies
   action: apt pkg={{item}} state=latest
   with_items:
+    - libcurl4-openssl-dev
     - curl
     - git
     - make
@@ -13,3 +14,12 @@
     - python-psycopg2
     - python-software-properties
     - libpq-dev
+
+- name: Place s3_put.sh in PATH
+  sudo: yes
+  copy:
+    mode: 0755
+    owner: vagrant
+    group: vagrant
+    src: s3_put.sh
+    dest: /usr/local/bin/s3_put.sh
