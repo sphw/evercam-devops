@@ -1,3 +1,11 @@
+- name: Generate SSL key
+  shell: openssl genrsa -out media_evercam_io.key 2048
+  when: production == False
+
+- name: Generate SSL certificate
+  shell: openssl req -new -x509 -key media_evercam_io.key -out media_evercam_io.pem -days 3650 -subj /CN=media.evercam.io
+  when: production == False
+
 - name: Copy SSL .pem file
   sudo: yes
   copy:
