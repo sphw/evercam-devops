@@ -5,6 +5,8 @@
     - vars.yml
     - ../elixir_setup/vars.yml
     - ../../private_vars_devops.yml
+  vars:
+    - production: False
   roles:
     - deps
     - { role: "../elixir_setup/ffmpeg"}
