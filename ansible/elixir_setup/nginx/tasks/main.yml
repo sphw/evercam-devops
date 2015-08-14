@@ -30,6 +30,10 @@
 - include: config.yml
   sudo: yes
 
+- include: firewall.yml
+  sudo: yes
+  when: production == True
+
 - name: Ensure Nginx is running
   service: name=nginx state=started
   sudo: yes
