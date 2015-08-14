@@ -1,9 +1,3 @@
-- name: Copy .env for the API
-  template: src="dotenv.api.j2" dest="{{ evercam_api_dir }}/.env"
-
-- name: Copy .env for the Dashboard
-  template: src="dotenv.dash.j2" dest="{{ evercam_dash_dir }}/.env"
-
 - name: Install gems for the API
   sudo_user: "{{ user_name }} -i"
   shell: bundle
@@ -12,7 +6,7 @@
 
 - name: Clone production database
   sudo_user: "{{ user_name }} -i"
-  shell: ./scripts/clone
+  shell: ./scripts/create
   args:
     chdir: "{{evercam_api_dir}}"
 
