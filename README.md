@@ -45,7 +45,7 @@ vagrant
 cd /vagrant/evercam-api
 bundle install
 fakes3 --root=/tmp/fakes3 --port=10453 &
-./scripts/create && bundle exec rake db:migrate && bundle exec rake db:seed
+./scripts/create
 bundle exec rspec
 
 cd /vagrant/evercam-dashboard
