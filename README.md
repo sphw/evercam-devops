@@ -48,12 +48,6 @@ vagrant up && vagrant ssh
 
 Grab a cup of your favorite beverage, this is going to take some time...
 
-#### Type the password in console
-
-```
-vagrant
-```
-
 #### Test that everything is working
 
 ```
