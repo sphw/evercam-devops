@@ -63,6 +63,7 @@ bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
 
 cd /vagrant/evercam-media
 npm install
+mix local.hex
 mix deps.get && mix deps.compile && mix compile
 mix test
 ```
