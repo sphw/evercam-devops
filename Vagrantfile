@@ -4,8 +4,8 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
 
   # TODO: Use packaged box for Windows users:
-  # config.vm.box = "evercam_box"
-  # config.vm.box_url = "https://dl.dropboxusercontent.com/s/nyx698gadrote0z/devops.box"
+  # config.vm.box = "evercam_devops"
+  # config.vm.box_url = "https://dl.dropboxusercontent.com/s/ipvnfy8at62hkxm/evercam-devops.box"
 
   config.vm.network :forwarded_port, guest: 80, host: 8888
   config.vm.network :forwarded_port, guest: 1935, host: 1935
