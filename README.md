@@ -61,6 +61,10 @@ cd /vagrant/evercam-dashboard
 bundle install
 bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
 
+echo -e "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+sudo apt-get update
+sudo apt-get --yes --force-yes install libjpeg-dev
+
 cd /vagrant/evercam-media
 npm install
 mix deps.get && mix deps.compile && mix compile
@@ -81,6 +85,20 @@ And in another terminal tab/window start the Dashboard server:
 ```
 cd /vagrant/evercam-dashboard
 EVERCAM_LOCAL=true bundle exec rails server -b 0.0.0.0
+```
+
+And in another terminal tab/window start the Media server:
+
+```
+cd /vagrant/evercam-media
+EVERCAM_LOCAL=true mix phoenix.server
+```
+
+And in another terminal tab/window start the Phony camera for offline tests:
+
+```
+cd /vagrant/phony_camera
+EVERCAM_LOCAL=true node index
 ```
 
 Open [http://localhost:3000/](http://localhost:3000/) in a browser and you'll see the dashboard of the Next Big Thing&trade;
