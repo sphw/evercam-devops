@@ -7,6 +7,7 @@
     - production: True
     - user_name: "{{ansible_ssh_user}}"
   roles:
+    - { role: elixir, erlang_version: 17.5, elixir_version: v1.0.4, sudo: yes }
     - ffmpeg
     - nginx
     - media
