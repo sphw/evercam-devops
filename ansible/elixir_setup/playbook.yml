@@ -8,7 +8,7 @@
     - user_name: "{{ansible_ssh_user}}"
   roles:
     - deps
-    - ANXS.postgresql
+    - { role: ANXS.postgresql, sudo: yes }
     - ffmpeg
     - nginx
     - media
