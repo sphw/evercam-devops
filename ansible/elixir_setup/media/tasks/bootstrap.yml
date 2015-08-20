@@ -24,6 +24,24 @@
     src="{{local_media_dir}}/rel/evercam_media/evercam_media-{{new_media_version.stdout}}.tar.gz"
     dest="{{remote_media_dir}}"
 
+- name: Check if motion detection file exists
+  local_action:
+    stat
+    path="{{local_media_dir}}/priv_dir/lib_elixir_motiondetection.so"
+  register: motion_detection_file
+
+- name: Ensure priv_dir exists
+  file: path="{{remote_media_dir}}/priv_dir" state=directory
+  when: motion_detection_file.stat.exists == True
+
+- name: Upload motion detecion file
+  copy:
+    owner: "{{user_name}}"
+    group: "{{user_name}}"
+    src: "{{local_media_dir}}/priv_dir/lib_elixir_motiondetection.so"
+    dest: "{{remote_media_dir}}/priv_dir/lib_elixir_motiondetection.so"
+  when: motion_detection_file.stat.exists == True
+
 - name: Ensure /usr/local/bin dir exists
   file: path=/usr/local/bin state=directory
   sudo: yes
