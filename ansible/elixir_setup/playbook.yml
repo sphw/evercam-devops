@@ -9,6 +9,7 @@
   roles:
     - deps
     - { role: ANXS.postgresql, sudo: yes }
+    - monitoring
     - ffmpeg
     - nginx
     - media
