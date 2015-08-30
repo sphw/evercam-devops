@@ -1,0 +1,11 @@
+description  "restart_evercam"
+start on filesystem or runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+chdir /
+setuid root
+setgid root
+console log
+
+exec watch -n 600 'sudo pkill run_erl; sudo pkill beam'
