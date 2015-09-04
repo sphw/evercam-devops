@@ -6,6 +6,7 @@
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant](http://www.vagrantup.com/downloads.html)
 * [Python](https://www.python.org/downloads/)
+* [Ansible](http://docs.ansible.com/ansible/intro_installation.html)
 * [Git](http://git-scm.com/downloads)
 
 #### Clone this repository and it's submodules
@@ -20,7 +21,6 @@ git submodule foreach --recursive git pull
 #### Install Ansible dependencies
 
 ```
-sudo pip install ansible
 sudo ansible-galaxy install -r ansible/requirements.yml --force
 ```
 
