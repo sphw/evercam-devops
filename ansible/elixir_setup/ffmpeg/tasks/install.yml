@@ -44,7 +44,7 @@
        accept_hostkey=yes
 
 - name: Clone latest opus
-  git: repo=git://git.opus-codec.org/opus.git
+  git: repo=https://git.xiph.org/opus.git
        dest={{ source_dir }}/opus
        accept_hostkey=yes
 
