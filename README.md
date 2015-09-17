@@ -52,13 +52,13 @@ Grab a cup of your favorite beverage, this is going to take some time...
 
 ```
 cd /vagrant/evercam-api
-bundle install
+bundle install --local
 fakes3 --root=/tmp/fakes3 --port=10453 &
 ./scripts/create
 bundle exec rspec
 
 cd /vagrant/evercam-dashboard
-bundle install
+bundle install --local
 bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
 
 cd /vagrant/evercam-media
