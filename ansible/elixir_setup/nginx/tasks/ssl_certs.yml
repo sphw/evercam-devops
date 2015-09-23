@@ -1,7 +1,7 @@
-- local_action: stat path="{{role_path}}/files/media_evercam_io.key"
+- stat: path="/vagrant/ansible/elixir_setup/nginx/files/media_evercam_io.key"
   register: local_key
 
-- local_action: stat path="{{role_path}}/files/media_evercam_io.cert"
+- stat: path="/vagrant/ansible/elixir_setup/nginx/files/media_evercam_io.cert"
   register: local_cert
 
 - name: Generate SSL key
