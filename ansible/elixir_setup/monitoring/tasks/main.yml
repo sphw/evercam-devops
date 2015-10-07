@@ -3,7 +3,7 @@
            dest=/etc/apt/sources.list.d/newrelic.list
   sudo: yes
 
-- name: Download repo key.
+- name: Download New Relic repo key.
   apt_key: url=http://download.newrelic.com/548C16BF.gpg
   sudo: yes
 
@@ -31,3 +31,28 @@
 - name: Start restart_evercam script
   shell: sudo start restart_evercam
   failed_when: false
+
+- name: Ensure that .aws directory exists
+  file:
+    path: /root/.aws
+    state: directory
+    mode: 0600
+
+- name: Create aws credentials file
+  template:
+    src: aws_credentials.j2
+    dest: /root/.aws/credentials
+    mode: 0600
+
+- name: Download AWS Log installer
+  get_url:
+    url: https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py
+    dest: /tmp/awslogs-agent-setup.py
+
+- name: Configure AWS Logs
+  template:
+    src: awslogs.conf.j2
+    dest: /tmp/awslogs.conf
+
+- name: Install AWS Logs deamon
+  command: /usr/bin/python /tmp/awslogs-agent-setup.py -n -r {{ aws_region }} -c /tmp/awslogs.conf
