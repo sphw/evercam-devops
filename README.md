@@ -14,8 +14,7 @@
 ```
 git clone https://github.com/evercam/evercam-devops.git && cd evercam-devops
 git pull && git submodule init && git submodule update && git submodule status
-git submodule foreach --recursive git checkout master
-git submodule foreach --recursive git pull
+git submodule foreach --recursive "git checkout master && git pull"
 ```
 
 #### Install Ansible dependencies
