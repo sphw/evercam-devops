@@ -33,12 +33,14 @@
   failed_when: false
 
 - name: Ensure that .aws directory exists
+  sudo: yes
   file:
     path: /root/.aws
     state: directory
     mode: 0600
 
 - name: Create aws credentials file
+  sudo: yes
   template:
     src: aws_credentials.j2
     dest: /root/.aws/credentials
@@ -55,4 +57,5 @@
     dest: /tmp/awslogs.conf
 
 - name: Install AWS Logs deamon
-  command: /usr/bin/python /tmp/awslogs-agent-setup.py -n -r {{ aws_region }} -c /tmp/awslogs.conf
+  sudo: yes
+  command: /usr/bin/python /tmp/awslogs-agent-setup.py -n -r eu-west-1 -c /tmp/awslogs.conf
