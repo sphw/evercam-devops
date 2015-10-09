@@ -17,7 +17,7 @@ source_dir: "/usr/local/src"
 lib_dir: "/usr/local/lib"
 bin_dir: "/usr/local/bin"
 
-media_env_vars: "{% for key, value in env_vars.items() %}{{value}} {% endfor %}"
+media_env_vars: "{% for key, value in env_vars.items() %}{{key.upper()}}={{value}} {% endfor %}"
 mix_env_vars: "MIX_ENV=prod PORT=4000"
 
 ansible_distribution_release: "trusty"
