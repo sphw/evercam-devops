@@ -2,7 +2,7 @@
 #   stat: path={{remote_media_dir}}
 #   register: release_exists
 
-# - include: cleanup.yml
+- include: cleanup.yml
 
 - include: bootstrap.yml
 #   # when: release_exists.stat.exists == False
