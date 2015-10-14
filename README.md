@@ -20,7 +20,7 @@ If you're using Windows, please use the `windows` branch and follow the instruct
 
 Otherwise, follow the instructions bellow.
 
-#### Install Host dependencies
+##### Install Host dependencies
 
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant](http://www.vagrantup.com/downloads.html)
@@ -28,7 +28,7 @@ Otherwise, follow the instructions bellow.
 * [Ansible](http://docs.ansible.com/ansible/intro_installation.html)
 * [Git](http://git-scm.com/downloads)
 
-#### Clone this repository and it's submodules
+##### Clone this repository and it's submodules
 
 ```
 git clone https://github.com/evercam/evercam-devops.git && cd evercam-devops
@@ -36,27 +36,27 @@ git pull && git submodule init && git submodule update && git submodule status
 git submodule foreach --recursive "git checkout master && git pull"
 ```
 
-#### Install Ansible dependencies
+##### Install Ansible dependencies
 
 ```
 sudo ansible-galaxy install -r ansible/requirements.yml --force
 ```
 
-#### Create a `private_vars_devops.yml` file and put your AWS keys in following format:
+##### Create a `private_vars_devops.yml` file and put your AWS keys in following format:
 
 ```
 aws_access_key: your_aws_access_key
 aws_secret_key: your_aws_secret_key
 ```
 
-#### Copy example `.env` file into required directories
+##### Copy example `.env` file into required directories
 
 ```
 cp .env evercam-api/ && cp .env evercam-dashboard/
 cp .env evercam-models/ && cp .env evercam-media/
 ```
 
-#### Run Vagrant and ssh into the VM
+##### Run Vagrant and ssh into the VM
 
 ```
 vagrant up && vagrant ssh
