@@ -16,7 +16,7 @@ When finished with the README, you will have a Vagrant Virtual Machine running U
 
 ### Installation
 
-If you're using Windows, please use the `windows` branch and follow the instructions provided there: https://github.com/evercam/evercam-devops/tree/windows
+If you're using Windows, please switch to the `windows` branch and follow the instructions provided there: https://github.com/evercam/evercam-devops/tree/windows
 
 Otherwise, follow the instructions bellow.
 
