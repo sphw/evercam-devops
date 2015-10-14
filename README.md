@@ -1,6 +1,25 @@
 [![Stories in Ready](https://badge.waffle.io/evercam/evercam-devops.png?label=ready&title=Ready)](https://waffle.io/evercam/evercam-devops)
 ## Evercam Development Environment Setup
 
+This repo is used for automated provisioning and configuration of developer and production environments needed to run Evercam system. This README will explain how to setup the developer environment.
+
+When finished with the README, you will have a Vagrant Virtual Machine running Ubuntu 14.04 LTS with the following software:
+
+* Ruby
+* Elixir
+* Erlang
+* Node.js
+* Redis
+* Memcached
+* Postgres with Postgis
+* Nginx with Nginx-RTMP
+
+### Installation
+
+If you're using Windows, please use the `windows` branch and follow the instructions provided there: https://github.com/evercam/evercam-devops/tree/windows
+
+Otherwise, follow the instructions bellow.
+
 #### Install Host dependencies
 
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
@@ -23,20 +42,18 @@ git submodule foreach --recursive "git checkout master && git pull"
 sudo ansible-galaxy install -r ansible/requirements.yml --force
 ```
 
-#### Create a `private_vars_devops.yml` file and fill it in with your information
+#### Create a `private_vars_devops.yml` file and put your AWS keys in following format:
 
 ```
-aws_access_key: "aws_access_key"
-aws_secret_key: "aws_secret_key"
+aws_access_key: your_aws_access_key
+aws_secret_key: your_aws_secret_key
 ```
 
 #### Copy example `.env` file into required directories
 
 ```
-cp .env evercam-api/
-cp .env evercam-dashboard/
-cp .env evercam-models/
-cp .env evercam-media/
+cp .env evercam-api/ && cp .env evercam-dashboard/
+cp .env evercam-models/ && cp .env evercam-media/
 ```
 
 #### Run Vagrant and ssh into the VM
@@ -47,7 +64,7 @@ vagrant up && vagrant ssh
 
 Grab a cup of your favorite beverage, this is going to take some time...
 
-#### Test that everything is working
+### Testing
 
 ```
 cd /vagrant/evercam-api
@@ -67,7 +84,7 @@ mix deps.get && mix deps.compile && mix compile
 mix test
 ```
 
-#### You're done!
+### Usage
 
 Now start the API server:
 
