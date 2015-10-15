@@ -18,16 +18,3 @@
 - name: Start New Relic.
   service: name=newrelic-sysmond state=started
   sudo: yes
-
-- name: Install the restart_evercam script
-  sudo: yes
-  template:
-    src: restart_evercam.conf.j2
-    dest: /etc/init/restart_evercam.conf
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Start restart_evercam script
-  shell: sudo start restart_evercam
-  failed_when: false
