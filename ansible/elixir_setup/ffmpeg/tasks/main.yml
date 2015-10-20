@@ -1,8 +1,10 @@
-- name: Check FFMPEG version
-  shell: ffmpeg -version 2>&1
-  register: ffmpeg_installed
-  failed_when: False
+- name: Add FFMPEG repository
+  apt_repository: repo='ppa:mc3man/trusty-media' state=present
 
-- include: install.yml
-  when: ffmpeg_installed.rc != 0
-  sudo: True
+- name: Update apt cache
+  action: apt update_cache=yes
+
+- name: Install dependencies
+  action: apt pkg={{item}} state=latest
+  with_items:
+    - ffmpeg
