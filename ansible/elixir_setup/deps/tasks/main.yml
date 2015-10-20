@@ -39,12 +39,3 @@
     creates: /usr/local/bin/goon
     removes: /tmp/goon
   when: goon_present.stat.exists == False
-
-- name: Upload s3_put.sh
-  sudo: yes
-  copy:
-    mode: 0755
-    owner: "{{user_name}}"
-    group: "{{user_name}}"
-    src: s3_put.sh
-    dest: /usr/local/bin/s3_put.sh
