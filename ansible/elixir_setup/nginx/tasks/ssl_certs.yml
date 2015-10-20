@@ -21,11 +21,11 @@
   copy:
     src: "media_evercam_io.pem"
     dest: "/etc/ssl/media_evercam_io.pem"
-  when: production == True and local_key.stat.exists == True
+  when: local_key.stat.exists == True
 
 - name: Copy local SSL .key file
   sudo: yes
   copy:
     src: "media_evercam_io.key"
     dest: "/etc/ssl/media_evercam_io.key"
-  when: production == True and local_key.stat.exists == True
+  when: local_key.stat.exists == True

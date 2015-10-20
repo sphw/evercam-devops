@@ -7,9 +7,9 @@
     - production: True
     - user_name: "{{ansible_ssh_user}}"
   roles:
-    - deps
-    - { role: ANXS.postgresql, sudo: yes }
-    - monitoring
-    - ffmpeg
-    - nginx
-    - media
+    - { role: deps, tags: configure }
+    - { role: ANXS.postgresql, tags: configure, sudo: yes }
+    - { role: monitoring, tags: configure }
+    - { role: ffmpeg, tags: configure }
+    - { role: nginx, tags: configure }
+    - { role: media, tags: deploy,evercam-media }
