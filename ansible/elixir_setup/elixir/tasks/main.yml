@@ -1,0 +1,20 @@
+- name: Download Erlang Solutions repository
+  get_url:
+    url: https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
+    dest: /tmp/erlang-solutions_1.0_all.deb
+
+- name: Add Erlang Solutions repository
+  command: dpkg -i erlang-solutions_1.0_all.deb
+  args:
+    chdir: /tmp
+
+- name: Update apt cache
+  action: apt update_cache=yes
+
+- name: Install dependencies
+  action: apt pkg={{item}} state=latest
+  with_items:
+    - elixir
+    - erlang-dev
+    - erlang-edoc
+    - erlang-eunit
