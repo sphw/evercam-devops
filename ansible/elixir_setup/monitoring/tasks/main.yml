@@ -46,3 +46,39 @@
 - name: Install AWS Logs deamon
   sudo: yes
   command: /usr/bin/python /tmp/awslogs-agent-setup.py -n -r eu-west-1 -c /tmp/awslogs.conf
+
+- name: Install Boto
+  sudo: yes
+  command: pip install boto
+
+- name: Configure Boto
+  template:
+    src: .boto.j2
+    dest: "/home/{{user_name}}/.boto"
+
+- name: Get instance ec2 facts
+  action: ec2_facts
+  register: ec2_facts
+
+- name: Get resource tags from ec2 facts
+  sudo: yes
+  ec2_tag: resource={{ec2_facts.ansible_facts.ansible_ec2_instance_id}} region=eu-west-1 state=list
+  register: result
+
+- name: Create CPU utilization metric alarm
+  sudo: yes
+  ec2_metric_alarm:
+    state: present
+    region: eu-west-1
+    name: "{{result.tags.Name}}-low-cpu-utilization"
+    namespace: "AWS/EC2"
+    metric: "CPUUtilization"
+    statistic: Average
+    comparison: "<="
+    threshold: 10.0
+    unit: "Percent"
+    period: 300
+    evaluation_periods: 1
+    description: "It will be triggered when CPU utilization is more than 10% for 5 minutes"
+    dimensions: {"InstanceId": "{{ec2_facts.ansible_facts.ansible_ec2_instance_id}}"}
+    alarm_actions: arn:aws:sns:eu-west-1:114786593061:evercam-elixir
