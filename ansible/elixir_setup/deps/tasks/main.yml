@@ -14,6 +14,7 @@
   with_items:
     - htop
     - libjpeg-dev
+    - unattended-upgrades
 
 - name: Check if Goon is present
   stat: path=/usr/local/bin/goon
