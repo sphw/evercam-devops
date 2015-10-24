@@ -18,3 +18,9 @@
     - erlang-dev
     - erlang-edoc
     - erlang-eunit
+
+- name: Install hex
+  shell: mix local.hex --force
+
+- name: Install rebar
+  shell: mix local.rebar --force
