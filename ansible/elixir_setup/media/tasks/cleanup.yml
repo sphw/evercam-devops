@@ -1,3 +1,2 @@
-- name: Delete local releases directory
-  local_action: file path="{{local_media_dir}}/rel" state=absent
-
+- name: Delete build directory
+  file: path="{{build_dir}}" state=absent

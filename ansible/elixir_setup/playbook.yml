@@ -12,5 +12,5 @@
     - { role: monitoring, tags: configure }
     - { role: ffmpeg, tags: configure }
     - { role: nginx, tags: configure }
-    - { role: elixir, tags: configure }
+    - { role: elixir, tags: configure, sudo: yes }
     - { role: media, tags: deploy,evercam-media }

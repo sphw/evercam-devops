@@ -1,33 +1,46 @@
-# - name: Checkout new version of Elixir server
-#   local_action:
-#     command
-#     chdir={{local_media_dir}}
-#     git checkout {{version_to_deploy}}
+- name: Upload evercam-media code to the server
+  synchronize:
+    src: "{{local_media_dir}}/"
+    dest: "{{build_dir}}/"
+    rsync_opts:
+      - "--no-motd"
+      - "--exclude=.git"
+      - "--exclude=_build"
+      - "--exclude=deps"
+      - "--exclude=node_modules"
+      - "--exclude=rel"
 
-- name: Build new version of Elixir server
-  local_action:
-    shell
-    chdir={{local_media_dir}}
-    {{mix_env_vars}} {{media_env_vars}} mix do deps.get, release
+- name: Get evercam-media dependencies
+  shell: "{{mix_env_vars}} {{media_env_vars}} mix deps.get"
+  args:
+    chdir: "{{build_dir}}"
 
-- name: Check new version of Elixir server
-  local_action:
-    shell
-    cat {{local_media_dir}}/rel/evercam_media/releases/start_erl.data | awk '{print $2}'
-  register: new_media_version
+# - name: Test evercam-media
+#   shell: "mix test"
+#   args:
+#     chdir: "{{build_dir}}"
+
+- name: Build evercam-media application release
+  shell: "{{mix_env_vars}} {{media_env_vars}} mix do clean, compile, release"
+  args:
+    chdir: "{{build_dir}}"
+
+- name: Register the version of the release
+  shell: "cat {{build_dir}}/rel/evercam_media/releases/start_erl.data | awk '{print $2}'"
+  register: evercam_media_version
 
 - name: Ensure there is a directory for the new version
   file: path="{{remote_media_dir}}" state=directory
 
 - name: Copy the release to the production server
   unarchive:
-    src="{{local_media_dir}}/rel/evercam_media/evercam_media-{{new_media_version.stdout}}.tar.gz"
-    dest="{{remote_media_dir}}"
+    copy: no
+    src: "{{build_dir}}/rel/evercam_media/evercam_media-{{evercam_media_version.stdout}}.tar.gz"
+    dest: "{{remote_media_dir}}"
 
 - name: Check if motion detection file exists
-  local_action:
-    stat
-    path="{{local_media_dir}}/priv_dir/lib_elixir_motiondetection.so"
+  stat:
+    path: "{{build_dir}}/priv_dir/lib_elixir_motiondetection.so"
   register: motion_detection_file
 
 - name: Ensure priv_dir exists
@@ -35,11 +48,7 @@
   when: motion_detection_file.stat.exists == True
 
 - name: Upload motion detecion file
-  copy:
-    owner: "{{user_name}}"
-    group: "{{user_name}}"
-    src: "{{local_media_dir}}/priv_dir/lib_elixir_motiondetection.so"
-    dest: "{{remote_media_dir}}/priv_dir/lib_elixir_motiondetection.so"
+  shell: "cp {{build_dir}}/priv_dir/lib_elixir_motiondetection.so {{remote_media_dir}}/priv_dir/"
   when: motion_detection_file.stat.exists == True
 
 - name: Ensure /usr/local/bin dir exists
