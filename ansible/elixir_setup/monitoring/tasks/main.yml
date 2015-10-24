@@ -70,7 +70,7 @@
   ec2_metric_alarm:
     state: present
     region: eu-west-1
-    name: "{{result.tags.Name}}-low-cpu-utilization"
+    name: "media.evercam.io({{ec2_facts.ansible_facts.ansible_ec2_instance_id}})-low-cpu-utilization"
     namespace: "AWS/EC2"
     metric: "CPUUtilization"
     statistic: Average
