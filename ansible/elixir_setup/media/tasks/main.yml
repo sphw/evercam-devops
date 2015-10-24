@@ -15,3 +15,26 @@
   register: ping
   failed_when: "'pong' not in ping.stdout"
   changed_when: "ping.stdout != 'pong'"
+
+- name: Register git name
+  local_action:
+    shell
+    git config user.name
+  register: git_name
+
+- name: Register evercam-media commit hash
+  local_action:
+    shell
+    chdir={{local_media_dir}}
+    git rev-parse --short HEAD
+  register: commit_hash
+
+- name: Send default notification message via SNS
+  local_action:
+    module: sns
+    subject: "Evercam Media New Deploy"
+    msg: "{{git_name.stdout}} has deployed commit #{{commit_hash.stdout}}."
+    topic: "arn:aws:sns:eu-west-1:114786593061:evercam-media-deploy"
+    aws_access_key: "{{env_vars.aws_access_key}}"
+    aws_secret_key: "{{env_vars.aws_secret_key}}"
+    region: "eu-west-1"
