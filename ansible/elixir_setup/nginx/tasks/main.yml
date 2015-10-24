@@ -21,7 +21,7 @@
 - include: install.yml
   when: nginx_version != nginx_source_version
 
-- name: Check if SSL certificates are present
+- name: Check if SSL certificates are present on the server
   stat: path=/etc/ssl/media_evercam_io.pem
   register: ssl_cert
 

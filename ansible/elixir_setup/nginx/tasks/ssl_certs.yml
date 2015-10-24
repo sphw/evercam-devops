@@ -1,7 +1,15 @@
-- stat: path="/vagrant/ansible/elixir_setup/nginx/files/media_evercam_io.key"
+- name: Register playbooks path
+  local_action: shell pwd
+  register: playbook_path_output
+
+- name: Check if SSL certificates are present on the local machine
+  local_action: stat
+    path="{{playbook_path_output.stdout}}/nginx/files/media_evercam_io.key"
   register: local_key
 
-- stat: path="/vagrant/ansible/elixir_setup/nginx/files/media_evercam_io.cert"
+- name: Check if SSL certificates are present on the local machine
+  local_action: stat
+    path="{{playbook_path_output.stdout}}/nginx/files/media_evercam_io.pem"
   register: local_cert
 
 - name: Generate SSL key
