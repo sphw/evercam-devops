@@ -4,14 +4,17 @@
     dest: /tmp/erlang-solutions_1.0_all.deb
 
 - name: Add Erlang Solutions repository
+  sudo: yes
   command: dpkg -i erlang-solutions_1.0_all.deb
   args:
     chdir: /tmp
 
 - name: Update apt cache
+  sudo: yes
   action: apt update_cache=yes
 
 - name: Install dependencies
+  sudo: yes
   action: apt pkg={{item}} state=latest
   with_items:
     - elixir
