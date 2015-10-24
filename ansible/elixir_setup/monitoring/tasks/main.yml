@@ -60,11 +60,6 @@
   action: ec2_facts
   register: ec2_facts
 
-- name: Get resource tags from ec2 facts
-  sudo: yes
-  ec2_tag: resource={{ec2_facts.ansible_facts.ansible_ec2_instance_id}} region=eu-west-1 state=list
-  register: result
-
 - name: Create CPU utilization metric alarm
   sudo: yes
   ec2_metric_alarm:
