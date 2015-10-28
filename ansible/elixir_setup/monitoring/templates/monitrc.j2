@@ -1,0 +1,17 @@
+  set daemon 60
+  set logfile /var/log/monit.log
+  set idfile /var/lib/monit/id
+  set statefile /var/lib/monit/state
+
+  set eventqueue
+      basedir /var/lib/monit/events
+      slots 100
+
+  set httpd port 2812 and
+    use address localhost
+    allow localhost
+
+  check system localhost
+     if cpu usage (user) < 10% for 5 cycles then exec "/usr/local/bin/evercam_media_alert" as uid {{user_name}} and gid {{user_name}}
+
+   include /etc/monit/conf.d/*

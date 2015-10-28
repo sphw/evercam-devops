@@ -35,3 +35,4 @@
     aws_access_key: "{{env_vars.aws_access_key}}"
     aws_secret_key: "{{env_vars.aws_secret_key}}"
     region: "eu-west-1"
+  when: production == True

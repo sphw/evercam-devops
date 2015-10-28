@@ -1,0 +1,4 @@
+#!/bin/sh
+logs=`sudo tail -q -n 100 /home/{{user_name}}/evercam_media/log/erlang.log.1 /home/{{user_name}}/evercam_media/log/erlang.log.2 /home/{{user_name}}/evercam_media/log/erlang.log.3 /home/{{user_name}}/evercam_media/log/erlang.log.4 /home/{{user_name}}/evercam_media/log/erlang.log.5 2>/dev/null` || true
+aws --region eu-west-1 sns publish --topic-arn arn:aws:sns:eu-west-1:114786593061:AWS-Alarm --message "$logs"
+sudo pkill beam; sudo pkill run_erl

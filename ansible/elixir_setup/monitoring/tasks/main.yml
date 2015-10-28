@@ -1,79 +1,9 @@
-- name: Register New Relic repository.
-  get_url: url=http://download.newrelic.com/debian/newrelic.list
-           dest=/etc/apt/sources.list.d/newrelic.list
-  sudo: yes
+- include: new_relic.yml
+  when: production == True
 
-- name: Download New Relic repo key.
-  apt_key: url=http://download.newrelic.com/548C16BF.gpg
-  sudo: yes
+- include: aws.yml
+  when: production == True
 
-- name: Install New Relic.
-  apt: pkg=newrelic-sysmond update_cache=yes
-  sudo: yes
+- include: monit.yml
+  when: production == True
 
-- name: Configure New Relic with license key.
-  shell: "nrsysmond-config --set license_key={{new_relic_key}}"
-  sudo: yes
-
-- name: Start New Relic.
-  service: name=newrelic-sysmond state=started
-  sudo: yes
-
-- name: Ensure that .aws directory exists
-  sudo: yes
-  file:
-    path: /root/.aws
-    state: directory
-    mode: 0600
-
-- name: Create aws credentials file
-  sudo: yes
-  template:
-    src: aws_credentials.j2
-    dest: /root/.aws/credentials
-    mode: 0600
-
-- name: Download AWS Log installer
-  get_url:
-    url: https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py
-    dest: /tmp/awslogs-agent-setup.py
-
-- name: Configure AWS Logs
-  template:
-    src: awslogs.conf.j2
-    dest: /tmp/awslogs.conf
-
-- name: Install AWS Logs deamon
-  sudo: yes
-  command: /usr/bin/python /tmp/awslogs-agent-setup.py -n -r eu-west-1 -c /tmp/awslogs.conf
-
-- name: Install Boto
-  sudo: yes
-  command: pip install boto
-
-- name: Configure Boto
-  template:
-    src: .boto.j2
-    dest: "/home/{{user_name}}/.boto"
-
-- name: Get instance ec2 facts
-  action: ec2_facts
-  register: ec2_facts
-
-- name: Create CPU utilization metric alarm
-  sudo: yes
-  ec2_metric_alarm:
-    state: present
-    region: eu-west-1
-    name: "media.evercam.io({{ec2_facts.ansible_facts.ansible_ec2_instance_id}})-low-cpu-utilization"
-    namespace: "AWS/EC2"
-    metric: "CPUUtilization"
-    statistic: Average
-    comparison: "<="
-    threshold: 10.0
-    unit: "Percent"
-    period: 300
-    evaluation_periods: 1
-    description: "It will be triggered when CPU utilization is more than 10% for 5 minutes"
-    dimensions: {"InstanceId": "{{ec2_facts.ansible_facts.ansible_ec2_instance_id}}"}
-    alarm_actions: arn:aws:sns:eu-west-1:114786593061:evercam-elixir
