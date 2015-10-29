@@ -26,7 +26,7 @@
     git rev-parse --short HEAD
   register: commit_hash
 
-- name: Send default notification message via SNS
+- name: Send deploy notification via SNS
   local_action:
     module: sns
     subject: "Evercam Media New Deploy"

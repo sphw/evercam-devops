@@ -29,10 +29,10 @@
   shell: "cat {{build_dir}}/rel/evercam_media/releases/start_erl.data | awk '{print $2}'"
   register: evercam_media_version
 
-- name: Ensure there is a directory for the new version
+- name: Ensure there is a directory for the application
   file: path="{{remote_media_dir}}" state=directory
 
-- name: Copy the release to the production server
+- name: Copy the release to the application directory
   unarchive:
     copy: no
     src: "{{build_dir}}/rel/evercam_media/evercam_media-{{evercam_media_version.stdout}}.tar.gz"
@@ -47,7 +47,7 @@
   file: path="{{remote_media_dir}}/priv_dir" state=directory
   when: motion_detection_file.stat.exists == True
 
-- name: Upload motion detecion file
+- name: Copy motion detecion file
   shell: "cp {{build_dir}}/priv_dir/lib_elixir_motiondetection.so {{remote_media_dir}}/priv_dir/"
   when: motion_detection_file.stat.exists == True
 
