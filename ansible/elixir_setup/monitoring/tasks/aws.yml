@@ -49,10 +49,10 @@
     metric: "CPUUtilization"
     statistic: Average
     comparison: "<="
-    threshold: 5.0
+    threshold: 15.0
     unit: "Percent"
     period: 900
     evaluation_periods: 1
-    description: "It will be triggered when CPU utilization is more than 5% for 5 minutes"
+    description: "It will be triggered when CPU utilization is less than 15% for 15 minutes"
     dimensions: {"InstanceId": "{{ec2_facts.ansible_facts.ansible_ec2_instance_id}}"}
     alarm_actions: arn:aws:sns:eu-west-1:114786593061:evercam-elixir

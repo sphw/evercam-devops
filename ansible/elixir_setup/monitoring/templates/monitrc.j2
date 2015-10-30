@@ -12,6 +12,6 @@
     allow localhost
 
   check system localhost
-     if cpu usage (user) < 5% for 5 cycles then exec "/usr/local/bin/evercam_media_alert" as uid {{user_name}} and gid {{user_name}}
+     if cpu usage (user) < 15% for 5 cycles then exec "/usr/local/bin/evercam_media_alert" as uid {{user_name}} and gid {{user_name}}
 
    include /etc/monit/conf.d/*
