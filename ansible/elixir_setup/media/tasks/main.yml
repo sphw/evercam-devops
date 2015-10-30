@@ -26,11 +26,18 @@
     git rev-parse --short HEAD
   register: commit_hash
 
+- name: Register evercam-media last commit details
+  local_action:
+    shell
+    chdir={{local_media_dir}}
+    git log -1
+  register: last_commit_details
+
 - name: Send deploy notification via SNS
   local_action:
     module: sns
     subject: "Evercam Media New Deploy"
-    msg: "{{git_name.stdout}} has deployed commit #{{commit_hash.stdout}}.\n\nYou can see it on GitHub here: https://github.com/evercam/evercam-media/commits/{{commit_hash.stdout}}"
+    msg: "{{git_name.stdout}} has deployed commit #{{commit_hash.stdout}}.\n\nYou can see it on GitHub here: https://github.com/evercam/evercam-media/commits/{{commit_hash.stdout}}\n\nLast commit details:\n\n{{last_commit_details.stdout}}"
     topic: "arn:aws:sns:eu-west-1:114786593061:evercam-media-deploy"
     aws_access_key: "{{env_vars.aws_access_key}}"
     aws_secret_key: "{{env_vars.aws_secret_key}}"
