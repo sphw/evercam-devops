@@ -27,3 +27,13 @@ postgresql_ext_postgis_version: 2.1
 postgresql_ext_install_postgis: yes
 postgresql_ext_install_contrib: yes
 postgresql_ssl: on
+
+ulimit_config:
+  - domain: '*'
+    type: soft
+    item: nofile
+    value: 10000
+  - domain: '*'
+    type: hard
+    item: nofile
+    value: 10000
