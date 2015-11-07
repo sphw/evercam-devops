@@ -8,7 +8,6 @@
 
 - name: Restart evercam-media
   command: "{{remote_media_dir}}/bin/evercam_media restart"
-  when: release_exists.stat.exists == True
   register: result
   failed_when: "result.stdout != 'ok'"
   changed_when: "result.stdout != 'ok'"
