@@ -1,6 +1,7 @@
 - name: Register playbooks path
   local_action: shell pwd
   register: playbook_path_output
+  sudo: no
 
 - name: Check if SSL certificates are present on the local machine
   local_action: stat
