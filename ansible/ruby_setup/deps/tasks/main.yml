@@ -16,3 +16,4 @@
     - libpq-dev
     - libjpeg-dev
     - libcurl4-openssl-dev
+    - libgmp3-dev
