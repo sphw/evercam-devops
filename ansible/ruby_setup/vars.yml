@@ -7,6 +7,7 @@ rvm1_rubies:
 rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/{{ ansible_ssh_user }}/.rvm'
 rvm1_user: '{{ user_name }}'
+rvm1_group: '{{ user_name }}'
 rvm1_gpg_key_server: 'hkp://pgp.mit.edu'
 
 postgresql_version: 9.4
