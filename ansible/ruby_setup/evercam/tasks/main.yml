@@ -1,6 +1,6 @@
 - name: Install gems for the API
   sudo_user: "{{ user_name }} -i"
-  shell: bundle
+  shell: bundle install --local
   args:
     chdir: "{{evercam_api_dir}}"
 
@@ -18,6 +18,6 @@
 
 - name: Install gems for the Dashboard
   sudo_user: "{{ user_name }} -i"
-  shell: bundle
+  shell: bundle install --local
   args:
     chdir: "{{evercam_dash_dir}}"
