@@ -21,3 +21,9 @@
   shell: bundle install --local
   args:
     chdir: "{{evercam_dash_dir}}"
+
+- name: Install hex packages for Media
+  sudo_user: "{{ user_name }} -i"
+  shell: mix deps.get
+  args:
+    chdir: "{{evercam_media_dir}}"
