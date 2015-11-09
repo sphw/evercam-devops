@@ -1,3 +1,11 @@
+- name: Ensure RVM path exists
+  file:
+    path='{{ rvm1_install_path }}'
+    state=directory
+    recurse=yes
+    owner='{{ rvm1_user }}'
+    group='{{ rvm1_group }}'
+
 - name: Install gems for the API
   sudo_user: "{{ user_name }} -i"
   shell: bundle install --local
