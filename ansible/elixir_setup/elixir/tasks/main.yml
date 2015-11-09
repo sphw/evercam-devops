@@ -25,6 +25,10 @@
 
 - name: Install hex
   shell: mix local.hex --force
+  sudo_user: "{{ user_name }} -i"
+  sudo: yes
 
 - name: Install rebar
   shell: mix local.rebar --force
+  sudo_user: "{{ user_name }} -i"
+  sudo: yes
