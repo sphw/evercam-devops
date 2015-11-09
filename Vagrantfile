@@ -3,10 +3,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.box = "ubuntu/trusty64"
 
-  # TODO: Use packaged box for Windows users:
-  # config.vm.box = "evercam_devops"
-  # config.vm.box_url = "https://dl.dropboxusercontent.com/s/ipvnfy8at62hkxm/evercam-devops.box"
-
   config.vm.network :forwarded_port, guest: 80, host: 8888
   config.vm.network :forwarded_port, guest: 1935, host: 1935
   config.vm.network :forwarded_port, guest: 3000, host: 3000
@@ -14,8 +10,6 @@ Vagrant.configure(2) do |config|
   config.vm.network :forwarded_port, guest: 9292, host: 9292
   config.vm.network :private_network, ip: "192.168.50.50"
 
-  # TODO: Disable this for Windows users:
-  # config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
