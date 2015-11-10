@@ -6,7 +6,6 @@ respawn
 chdir /
 setuid root
 setgid root
-console log
 
 env HOME=/home/{{user_name}}
 {% for key, value in env_vars.items() %}
