@@ -32,8 +32,8 @@ ulimit_config:
   - domain: '*'
     type: soft
     item: nofile
-    value: 10000
+    value: 2000000
   - domain: '*'
     type: hard
     item: nofile
-    value: 10000
+    value: 2000000

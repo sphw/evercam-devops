@@ -48,3 +48,31 @@
 
 - name: Install Heroku Toolbelt
   shell: wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+- name: Set fs.file-max
+  sysctl: name=fs.file-max value=12000500 state=present
+  sudo: yes
+
+- name: Set fs.nr_open
+  sysctl: name=fs.nr_open value=20000500 state=present
+  sudo: yes
+
+- name: Set net.ipv4.tcp_mem
+  sysctl: name=net.ipv4.tcp_mem value='10000000 10000000 10000000' state=present
+  sudo: yes
+
+- name: Set net.ipv4.tcp_rmem
+  sysctl: name=net.ipv4.tcp_rmem value='1024 4096 16384' state=present
+  sudo: yes
+
+- name: Set net.ipv4.tcp_wmem
+  sysctl: name=net.ipv4.tcp_wmem value='1024 4096 16384' state=present
+  sudo: yes
+
+- name: Set net.core.rmem_max
+  sysctl: name=net.core.rmem_max value=16384 state=present
+  sudo: yes
+
+- name: Set net.core.wmem_max
+  sysctl: name=net.core.wmem_max value=16384 state=present
+  sudo: yes
