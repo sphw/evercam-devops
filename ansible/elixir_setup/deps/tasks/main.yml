@@ -42,3 +42,6 @@
     creates: /usr/local/bin/goon
     removes: /tmp/goon
   when: goon_present.stat.exists == False
+
+- name: Install Heroku Toolbelt
+  shell: wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
