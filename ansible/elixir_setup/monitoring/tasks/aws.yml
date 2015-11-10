@@ -12,20 +12,6 @@
     dest: /root/.aws/credentials
     mode: 0600
 
-- name: Download AWS Log installer
-  get_url:
-    url: https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py
-    dest: /tmp/awslogs-agent-setup.py
-
-- name: Configure AWS Logs
-  template:
-    src: awslogs.conf.j2
-    dest: /tmp/awslogs.conf
-
-- name: Install AWS Logs deamon
-  sudo: yes
-  command: /usr/bin/python /tmp/awslogs-agent-setup.py -n -r eu-west-1 -c /tmp/awslogs.conf
-
 - name: Install Boto
   sudo: yes
   command: pip install boto

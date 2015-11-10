@@ -6,4 +6,3 @@
 
 - include: monit.yml
   when: production == True
-
