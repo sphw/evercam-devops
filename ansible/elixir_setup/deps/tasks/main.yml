@@ -1,3 +1,6 @@
+- hostname: name=media.evercam.io
+  sudo: yes
+
 - name: Ensure /usr/local/bin dir exists
   file: path=/usr/local/bin state=directory
   sudo: yes
