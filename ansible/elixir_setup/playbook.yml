@@ -8,6 +8,7 @@
     - user_name: "{{ansible_ssh_user}}"
   roles:
     - { role: deps, tags: configure }
+    - { role: wgregorian.sumocollector, tags: configure, sudo: yes }
     - { role: jtyr.ulimit, tags: configure, sudo: yes }
     - { role: ANXS.postgresql, tags: configure, sudo: yes }
     - { role: monitoring, tags: configure }

@@ -37,3 +37,12 @@ ulimit_config:
     type: hard
     item: nofile
     value: 2000000
+
+sumocollector_installer_download: https://collectors.eu.sumologic.com/rest/download/deb/64
+sumologic_collector_accessid: "{{sumo_logic_id}}"
+sumologic_collector_accesskey: "{{sumo_logic_key}}"
+sumologic_collector_application_log_path:
+  - name: "evercam-media"
+    path: "/home/{{ansible_ssh_user}}/evercam_media/log/erlang.log.*"
+    use_multiline: false
+    category: "evercam-media"
