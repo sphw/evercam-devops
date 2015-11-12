@@ -18,6 +18,7 @@
     - git
     - iotop
     - htop
+    - python-pip
     - libjpeg-dev
     - unattended-upgrades
 
