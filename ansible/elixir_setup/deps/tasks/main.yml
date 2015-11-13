@@ -63,17 +63,17 @@
   sudo: yes
 
 - name: Set net.ipv4.tcp_rmem
-  sysctl: name=net.ipv4.tcp_rmem value='1024 4096 16384' state=present
+  sysctl: name=net.ipv4.tcp_rmem value='8388608 8388608 8388608' state=present
   sudo: yes
 
 - name: Set net.ipv4.tcp_wmem
-  sysctl: name=net.ipv4.tcp_wmem value='1024 4096 16384' state=present
+  sysctl: name=net.ipv4.tcp_wmem value='4096 65536 8388608' state=present
   sudo: yes
 
 - name: Set net.core.rmem_max
-  sysctl: name=net.core.rmem_max value=16384 state=present
+  sysctl: name=net.core.rmem_max value=8388608 state=present
   sudo: yes
 
 - name: Set net.core.wmem_max
-  sysctl: name=net.core.wmem_max value=16384 state=present
+  sysctl: name=net.core.wmem_max value=8388608 state=present
   sudo: yes
