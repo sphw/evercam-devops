@@ -110,3 +110,7 @@ EVERCAM_LOCAL=true node index
 ```
 
 Open [http://localhost:3000/](http://localhost:3000/) in a browser and you'll see the dashboard of the Next Big Thing&trade;
+
+## Documentation
+
+**All** of the Evercam documentation can be found here: https://github.com/evercam/evercam-api/wiki
