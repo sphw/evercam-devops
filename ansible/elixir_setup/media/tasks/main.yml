@@ -1,17 +1,3 @@
-- name: Check if Elixir release directory exists
-  stat: path={{remote_media_dir}}
-  register: release_exists
-
-- include: cleanup.yml
-
-- include: bootstrap.yml
-
-- name: Restart evercam-media
-  command: "{{remote_media_dir}}/bin/evercam_media restart"
-  register: result
-  failed_when: "result.stdout != 'ok'"
-  changed_when: "result.stdout != 'ok'"
-
 - name: Register git name
   local_action:
     shell
@@ -31,6 +17,20 @@
     chdir={{local_media_dir}}
     git log -1
   register: last_commit_details
+
+- name: Check if Elixir release directory exists
+  stat: path={{remote_media_dir}}
+  register: release_exists
+
+- include: cleanup.yml
+
+- include: bootstrap.yml
+
+- name: Restart evercam-media
+  command: "{{remote_media_dir}}/bin/evercam_media restart"
+  register: result
+  failed_when: "result.stdout != 'ok'"
+  changed_when: "result.stdout != 'ok'"
 
 - name: Send deploy notification via SNS
   local_action:
