@@ -13,7 +13,6 @@
 
   check system localhost
      if cpu usage (user) < 5% for 5 cycles then exec "/usr/local/bin/evercam_media_alert" as uid {{user_name}} and gid {{user_name}}
-     if cpu usage (user) < 10% for 10 cycles then exec "/usr/local/bin/evercam_media_alert" as uid {{user_name}} and gid {{user_name}}
 
   check file media_logs_1 with path /home/ubuntu/evercam_media/log/erlang.log.1
     if match "emfile" then exec "/usr/local/bin/evercam_media_alert" as uid {{user_name}} and gid {{user_name}}
