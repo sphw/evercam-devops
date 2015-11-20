@@ -29,7 +29,7 @@
 - name: Restart evercam-media
   command: "{{remote_media_dir}}/bin/evercam_media restart"
   register: result
-  failed_when: "result.stdout != 'ok'"
+  failed_when: false
   changed_when: "result.stdout != 'ok'"
 
 - name: Send deploy notification via SNS
