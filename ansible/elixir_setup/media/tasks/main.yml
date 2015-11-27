@@ -1,26 +1,49 @@
-- name: Register git name
-  local_action:
-    shell
-    git config user.name
-  register: git_name
+- name: Check if evercam-media build directory exists
+  stat: path={{build_dir}}
+  register: build_exists
 
-- name: Register evercam-media commit hash
+- name: Register evercam-media live commit hash
+  shell:
+    chdir={{build_dir}}
+    git rev-parse --short HEAD
+  register: live_commit_hash
+  when: build_exists.stat.exists
+
+- name: Register evercam-media local commit hash
   local_action:
     shell
     chdir={{local_media_dir}}
     git rev-parse --short HEAD
-  register: commit_hash
+  register: local_commit_hash
 
 - name: Register evercam-media last commit details
   local_action:
     shell
     chdir={{local_media_dir}}
     git log -1
-  register: last_commit_details
+  register: last_commit
 
-- name: Check if Elixir release directory exists
-  stat: path={{remote_media_dir}}
-  register: release_exists
+- name: Register git name
+  local_action:
+    shell
+    git config user.name
+  register: git_name
+
+- name: Register differing commits
+  local_action:
+    shell
+    chdir={{local_media_dir}}
+    git log {{live_commit_hash.stdout}}..{{local_commit_hash.stdout}}
+  register: differing_commits
+  when: build_exists.stat.exists
+
+- set_fact:
+    deployed_commits: "{{last_commit.stdout}}"
+  when: build_exists.stat.exists == False
+
+- set_fact:
+    deployed_commits: "{{differing_commits.stdout}}"
+  when: build_exists.stat.exists == True
 
 - include: cleanup.yml
 
@@ -36,7 +59,7 @@
   local_action:
     module: sns
     subject: "Evercam Media New Deploy"
-    msg: "{{git_name.stdout}} has deployed commit #{{commit_hash.stdout}}.\n\nYou can see it on GitHub here: https://github.com/evercam/evercam-media/commits/{{commit_hash.stdout}}\n\nLast commit details:\n\n{{last_commit_details.stdout}}"
+    msg: "{{git_name.stdout}} has deployed commit #{{local_commit_hash.stdout}}.\n\nYou can see it on GitHub here: https://github.com/evercam/evercam-media/commits/{{local_commit_hash.stdout}}\n\nDeployed commits details:\n\n{{deployed_commits}}"
     topic: "arn:aws:sns:eu-west-1:114786593061:evercam-media-deploy"
     aws_access_key: "{{env_vars.aws_access_key}}"
     aws_secret_key: "{{env_vars.aws_secret_key}}"

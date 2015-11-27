@@ -2,7 +2,7 @@
   git:
     repo: https://github.com/evercam/evercam-media
     dest: "{{build_dir}}/"
-    version: "{{commit_hash.stdout}}"
+    version: "{{local_commit_hash.stdout}}"
 
 - name: Get evercam-media dependencies
   shell: "{{mix_env_vars}} {{media_env_vars}} mix deps.get"
