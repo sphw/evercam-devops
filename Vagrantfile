@@ -2,6 +2,7 @@ Vagrant.configure(2) do |config|
   config.ssh.insert_key = false
 
   config.vm.box = "ubuntu/trusty64"
+  config.vm.define "evercam-devops"
 
   config.vm.network :forwarded_port, guest: 80, host: 8888
   config.vm.network :forwarded_port, guest: 1935, host: 1935
