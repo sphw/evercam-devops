@@ -12,6 +12,7 @@
 - name: Update apt cache
   sudo: yes
   action: apt update_cache=yes
+  failed_when: false
 
 - name: Install dependencies
   sudo: yes

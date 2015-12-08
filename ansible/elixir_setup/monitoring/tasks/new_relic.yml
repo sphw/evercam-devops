@@ -9,6 +9,7 @@
 
 - name: Install New Relic.
   apt: pkg=newrelic-sysmond update_cache=yes
+  failed_when: false
   sudo: yes
 
 - name: Configure New Relic with license key.
