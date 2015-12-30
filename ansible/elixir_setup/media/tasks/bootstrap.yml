@@ -29,7 +29,7 @@
 - name: Copy the release to the application directory
   unarchive:
     copy: no
-    src: "{{build_dir}}/rel/evercam_media/evercam_media-{{evercam_media_version.stdout}}.tar.gz"
+    src: "{{build_dir}}/rel/evercam_media/releases/{{evercam_media_version.stdout}}/evercam_media.tar.gz"
     dest: "{{remote_media_dir}}"
 
 - name: Check if motion detection file exists
