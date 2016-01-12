@@ -4,8 +4,8 @@ stop on runlevel [!2345]
 
 respawn
 chdir /
-setuid root
-setgid root
+setuid {{user_name}}
+setgid {{user_name}}
 
 env HOME=/home/{{user_name}}
 env LANG=en_US.UTF-8
