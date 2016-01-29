@@ -75,7 +75,6 @@ cd /vagrant/evercam-dashboard
 bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
 
 cd /vagrant/evercam-media
-npm install
 mix test
 ```
 
