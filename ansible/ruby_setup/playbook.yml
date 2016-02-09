@@ -1,5 +1,5 @@
 - hosts: all
-  user: vagrant
+  user: "{{ansible_ssh_user}}"
   sudo: yes
   vars_files:
     - vars.yml
@@ -7,12 +7,12 @@
     - ../../private_vars_devops.yml
   vars:
     - production: False
-    - user_name: vagrant
+    - user_name: "{{ansible_ssh_user}}"
   roles:
     - deps
-    - { role: "../elixir_setup/ffmpeg"}
-    - { role: "../elixir_setup/nginx"}
-    - { role: "../elixir_setup/elixir"}
+    - { role: "../elixir_setup/ffmpeg" }
+    - { role: "../elixir_setup/nginx" }
+    - { role: "../elixir_setup/elixir" }
     - nodesource.node
     - rvm_io.rvm1-ruby
     - ANXS.postgresql
