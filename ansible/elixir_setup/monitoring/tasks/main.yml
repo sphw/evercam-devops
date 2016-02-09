@@ -3,6 +3,3 @@
 
 - include: aws.yml
   when: production == True
-
-- include: monit.yml
-  when: production == True
