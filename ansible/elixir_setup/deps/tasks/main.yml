@@ -49,6 +49,7 @@
 
 - name: Install Heroku Toolbelt
   shell: wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+  sudo: yes
 
 - name: Set fs.file-max
   sysctl: name=fs.file-max value=12000500 state=present
