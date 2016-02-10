@@ -1,5 +1,2 @@
 - include: new_relic.yml
   when: production == True
-
-- include: aws.yml
-  when: production == True
