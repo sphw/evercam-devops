@@ -27,7 +27,8 @@
     cd /tmp/nginx-{{nginx_source_version}} &&
     ./configure --add-module=/tmp/nginx-rtmp-module-{{nginx_rtmp_version}} --add-module=/tmp/headers-more-nginx-module-{{nginx_more_headers_version}} --with-http_ssl_module &&
     make -j {{ansible_processor_cores}} &&
-    sudo make install
+    make install
+  sudo: yes
 
 - name: Install the upstart init script
   sudo: yes

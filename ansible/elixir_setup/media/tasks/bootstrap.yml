@@ -68,5 +68,6 @@
     mode: 0755
 
 - name: Start production server
-  shell: sudo start evercam_media
+  shell: start evercam_media
+  sudo: yes
   failed_when: False
