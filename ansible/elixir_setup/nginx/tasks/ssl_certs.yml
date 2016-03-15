@@ -1,17 +1,12 @@
-- name: Register playbooks path
-  local_action: shell pwd
-  register: playbook_path_output
-  sudo: no
-
 - name: Check if SSL certificates are present on the local machine
   local_action: stat
-    path="{{playbook_path_output.stdout}}/nginx/files/media_evercam_io.key"
+    path="{{playbook_dir}}/nginx/files/media_evercam_io.key"
   register: local_key
   sudo: no
 
 - name: Check if SSL certificates are present on the local machine
   local_action: stat
-    path="{{playbook_path_output.stdout}}/nginx/files/media_evercam_io.pem"
+    path="{{playbook_dir}}/nginx/files/media_evercam_io.pem"
   register: local_cert
   sudo: no
 
