@@ -1,6 +1,6 @@
-build_dir: ~/build-media
+build_dir: /tmp/build-media
+remote_media_dir: /opt/evercam_media
 local_media_dir: ~/evercam/evercam-media
-remote_media_dir: ~/evercam_media
 version_to_deploy: "{{VERSION|default('master')}}"
 
 nginx_pid: "/var/run/nginx.pid"
