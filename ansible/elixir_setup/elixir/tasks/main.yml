@@ -23,6 +23,7 @@
     - erlang-edoc
     - erlang-eunit
     - erlang-base-hipe
+    - erlang-tools
 
 - name: Install hex
   shell: mix local.hex --force
