@@ -54,14 +54,3 @@
   register: result
   failed_when: false
   changed_when: "result.stdout != 'ok'"
-
-- name: Send deploy notification via SNS
-  local_action:
-    module: sns
-    subject: "Evercam Media New Deploy"
-    msg: "{{git_name.stdout}} has deployed commit #{{local_commit_hash.stdout}}.\n\nYou can see it on GitHub here: https://github.com/evercam/evercam-media/commits/{{local_commit_hash.stdout}}\n\nDeployed commits details:\n\n{{deployed_commits}}"
-    topic: "arn:aws:sns:eu-west-1:114786593061:evercam-media-deploy"
-    aws_access_key: "{{env_vars.aws_access_key}}"
-    aws_secret_key: "{{env_vars.aws_secret_key}}"
-    region: "eu-west-1"
-  when: production == True
