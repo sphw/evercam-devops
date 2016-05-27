@@ -19,11 +19,7 @@
   action: apt pkg={{item}} state=latest
   with_items:
     - elixir
-    - erlang-dev
-    - erlang-edoc
-    - erlang-eunit
-    - erlang-base-hipe
-    - erlang-tools
+    - esl-erlang
 
 - name: Install hex
   shell: mix local.hex --force
