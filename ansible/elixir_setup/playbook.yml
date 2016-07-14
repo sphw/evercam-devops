@@ -15,4 +15,4 @@
     - { role: ffmpeg, tags: configure, sudo: yes }
     - { role: nginx, tags: configure }
     - { role: elixir, tags: configure }
-    - { role: media, tags: deploy,evercam-media }
+    - { role: media, tags: evercam-media }

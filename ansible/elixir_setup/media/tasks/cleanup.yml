@@ -1,2 +1,0 @@
-- name: Delete build directory
-  file: path="{{build_dir}}" state=absent

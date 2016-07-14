@@ -1,56 +1,15 @@
-- name: Check if evercam-media build directory exists
-  stat: path={{build_dir}}
-  register: build_exists
+- include: setup.yml
+  tags: configure
 
-- name: Register evercam-media live commit hash
-  shell:
-    chdir={{build_dir}}
-    git rev-parse --short HEAD
-  register: live_commit_hash
-  when: build_exists.stat.exists
+- include: deploy.yml
+  tags: deploy
 
-- name: Register evercam-media local commit hash
-  local_action:
-    shell
-    chdir={{local_media_dir}}
-    git rev-parse --short HEAD
-  register: local_commit_hash
+- name: Stop evercam-media
+  shell: stop evercam_media
+  sudo: yes
+  failed_when: False
 
-- name: Register evercam-media last commit details
-  local_action:
-    shell
-    chdir={{local_media_dir}}
-    git log -1
-  register: last_commit
-
-- name: Register git name
-  local_action:
-    shell
-    git config user.name
-  register: git_name
-
-- name: Register differing commits
-  local_action:
-    shell
-    chdir={{local_media_dir}}
-    git log {{live_commit_hash.stdout}}..{{local_commit_hash.stdout}}
-  register: differing_commits
-  when: build_exists.stat.exists
-
-- set_fact:
-    deployed_commits: "{{last_commit.stdout}}"
-  when: build_exists.stat.exists == False
-
-- set_fact:
-    deployed_commits: "{{differing_commits.stdout}}"
-  when: build_exists.stat.exists == True
-
-- include: cleanup.yml
-
-- include: bootstrap.yml
-
-- name: Restart evercam-media
-  command: "{{remote_media_dir}}/bin/evercam_media restart"
-  register: result
-  failed_when: false
-  changed_when: "result.stdout != 'ok'"
+- name: Start evercam-media
+  shell: start evercam_media
+  sudo: yes
+  failed_when: False

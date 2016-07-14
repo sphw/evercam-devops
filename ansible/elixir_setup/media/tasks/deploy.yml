@@ -1,3 +1,13 @@
+- name: Register evercam-media local commit hash
+  local_action:
+    shell
+    chdir={{local_media_dir}}
+    git rev-parse --short HEAD
+  register: local_commit_hash
+
+- name: Delete build directory
+  file: path="{{build_dir}}" state=absent
+
 - name: Clone evercam-media
   git:
     repo: https://github.com/evercam/evercam-media
@@ -51,29 +61,3 @@
   shell: "cp {{build_dir}}/priv_dir/lib_elixir_motiondetection.so {{remote_media_dir}}/priv_dir/"
   when: motion_detection_file.stat.exists == True
 
-- name: Ensure /usr/local/bin dir exists
-  file: path=/usr/local/bin state=directory
-  sudo: yes
-
-- name: Copy evercam_media run init script
-  sudo: yes
-  template:
-    src: run_evercam_media.sh.j2
-    dest: /usr/local/bin/run_evercam_media.sh
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Install the evercam_media init script
-  sudo: yes
-  template:
-    src: evercam_media.conf.j2
-    dest: /etc/init/evercam_media.conf
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Start production server
-  shell: start evercam_media
-  sudo: yes
-  failed_when: False
