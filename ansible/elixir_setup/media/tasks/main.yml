@@ -8,8 +8,10 @@
   shell: stop evercam_media
   sudo: yes
   failed_when: False
+  tags: deploy
 
 - name: Start evercam-media
   shell: start evercam_media
   sudo: yes
   failed_when: False
+  tags: deploy
