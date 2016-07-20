@@ -4,7 +4,6 @@
   vars_files:
     - vars.yml
     - ../elixir_setup/vars.yml
-    - ../../private_vars_devops.yml
   vars:
     - production: False
     - user_name: "{{ansible_ssh_user}}"

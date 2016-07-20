@@ -42,13 +42,6 @@ git submodule foreach --recursive "git checkout master && git pull"
 sudo ansible-galaxy install -r ansible/requirements.yml --force
 ```
 
-##### Create a `private_vars_devops.yml` file and put your AWS keys in following format:
-
-```
-aws_access_key: your_aws_access_key
-aws_secret_key: your_aws_secret_key
-```
-
 ##### Copy example `.env` file into required directories
 
 ```
