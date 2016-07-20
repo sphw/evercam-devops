@@ -1,4 +1,3 @@
-evercam_api_dir: /vagrant/evercam-api
 evercam_dash_dir: /vagrant/evercam-dashboard
 evercam_media_dir: /vagrant/evercam-media
 

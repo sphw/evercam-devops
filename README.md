@@ -45,8 +45,7 @@ sudo ansible-galaxy install -r ansible/requirements.yml --force
 ##### Copy example `.env` file into required directories
 
 ```
-cp .env evercam-api/ && cp .env evercam-dashboard/
-cp .env evercam-models/ && cp .env evercam-media/
+cp .env evercam-dashboard/ && cp .env evercam-models/ && cp .env evercam-media/
 ```
 
 ##### Run Vagrant and ssh into the VM
@@ -60,10 +59,6 @@ Grab a cup of your favorite beverage, this is going to take some time...
 ### Testing
 
 ```
-cd /vagrant/evercam-api
-fakes3 --root=/tmp/fakes3 --port=10453 &
-bundle exec rspec
-
 cd /vagrant/evercam-dashboard
 bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
 
@@ -73,11 +68,11 @@ mix test
 
 ### Usage
 
-Now start the API server:
+Now start the Media server:
 
 ```
-cd /vagrant/evercam-api
-bundle exec rackup -o 0.0.0.0
+cd /vagrant/evercam-media
+EVERCAM_LOCAL=true mix phoenix.server
 ```
 
 And in another terminal tab/window start the Dashboard server:
@@ -85,13 +80,6 @@ And in another terminal tab/window start the Dashboard server:
 ```
 cd /vagrant/evercam-dashboard
 EVERCAM_LOCAL=true bundle exec rails server -b 0.0.0.0
-```
-
-And in another terminal tab/window start the Media server:
-
-```
-cd /vagrant/evercam-media
-EVERCAM_LOCAL=true mix phoenix.server
 ```
 
 And in another terminal tab/window start the Phony camera for offline tests:

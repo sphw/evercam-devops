@@ -6,24 +6,6 @@
     owner='{{ rvm1_user }}'
     group='{{ rvm1_group }}'
 
-- name: Install gems for the API
-  sudo_user: "{{ user_name }} -i"
-  shell: bundle install --local
-  args:
-    chdir: "{{evercam_api_dir}}"
-
-- name: Clone production database
-  sudo_user: "{{ user_name }} -i"
-  shell: ./scripts/create
-  args:
-    chdir: "{{evercam_api_dir}}"
-
-- name: Run database migrations
-  sudo_user: "{{ user_name }} -i"
-  shell: NO_FAKE_S3=true bundle exec rake db:migrate
-  args:
-    chdir: "{{evercam_api_dir}}"
-
 - name: Install gems for the Dashboard
   sudo_user: "{{ user_name }} -i"
   shell: bundle install --local
