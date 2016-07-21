@@ -1,25 +1,59 @@
-- name: Download Erlang Solutions repository
-  get_url:
-    url: https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
-    dest: /tmp/erlang-solutions_1.0_all.deb
-
-- name: Add Erlang Solutions repository
+- name: Make sure the required packages are installed
   sudo: yes
-  command: dpkg -i erlang-solutions_1.0_all.deb
-  args:
-    chdir: /tmp
-
-- name: Update apt cache
-  sudo: yes
-  action: apt update_cache=yes
-  failed_when: false
-
-- name: Install dependencies
-  sudo: yes
-  action: apt pkg={{item}} state=latest
+  apt:
+    pkg: "{{item}}"
+    state: present
   with_items:
+    - autoconf
+    - build-essential
+    - libgl1-mesa-dev
+    - libglu1-mesa-dev
+    - libncurses5-dev
+    - libpng3
+    - libssh-dev
+    - libwxgtk2.8-dev
+    - m4
+    - unixodbc-dev
+    - unzip
+
+- name: Install asdf
+  git:
+    repo="https://github.com/HashNuke/asdf"
+    dest="/home/{{user_name}}/.asdf"
+    update=yes
+  sudo_user: "{{ user_name }} -i"
+
+- name: Source asdf in bashrc
+  lineinfile:
+    line="source /home/{{user_name}}/.asdf/asdf.sh"
+    dest="/home/{{user_name}}/.bash_profile"
+    create=yes
+    owner="{{user_name}}"
+  sudo_user: "{{ user_name }} -i"
+
+- name: Add asdf plugins
+  command: "bash -lc 'asdf plugin-add {{item}} https://github.com/HashNuke/asdf-{{item}}.git'"
+  with_items:
+    - erlang
     - elixir
-    - esl-erlang
+  failed_when: false
+  sudo_user: "{{ user_name }} -i"
+
+- name: Install Erlang using asdf
+  command: "bash -lc 'asdf install erlang 18.3'"
+  sudo_user: "{{ user_name }} -i"
+
+- name: Set Erlang version using asdf
+  command: "bash -lc 'asdf global erlang 18.3'"
+  sudo_user: "{{ user_name }} -i"
+
+- name: Install Elixir using asdf
+  command: "bash -lc 'asdf install elixir 1.3.1'"
+  sudo_user: "{{ user_name }} -i"
+
+- name: Set Elixir version using asdf
+  command: "bash -lc 'asdf global elixir 1.3.1'"
+  sudo_user: "{{ user_name }} -i"
 
 - name: Install hex
   shell: mix local.hex --force
