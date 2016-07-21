@@ -6,6 +6,9 @@
   vars:
     - production: True
     - user_name: "{{ansible_ssh_user}}"
+  tasks:
+    - hostname: name=media.evercam.io
+      sudo: yes
   roles:
     - { role: deps, tags: configure }
     - { role: wgregorian.sumocollector, tags: configure, sudo: yes }
