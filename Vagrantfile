@@ -25,7 +25,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "ansible/ruby_setup/playbook.yml"
+    ansible.playbook = "ansible/dev-playbook.yml"
     ansible.extra_vars = {
       ansible_ssh_user: "vagrant",
       remote_user: "vagrant"
