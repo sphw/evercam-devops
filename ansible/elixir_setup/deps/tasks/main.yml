@@ -13,18 +13,27 @@
     state: present
   with_items:
     - build-essential
+    - curl
     - git
     - htop
     - iotop
+    - libcurl4-openssl-dev
     - libgl1-mesa-dev
     - libglu1-mesa-dev
+    - libgmp3-dev
     - libjpeg-dev
     - libncurses5-dev
     - libpng3
+    - libpq-dev
     - libssh-dev
     - libwxgtk2.8-dev
     - m4
+    - make
+    - python
     - python-pip
+    - python-psycopg2
+    - python-pycurl
+    - python-software-properties
     - unattended-upgrades
     - unixodbc-dev
     - unzip
