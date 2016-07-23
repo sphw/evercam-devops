@@ -1,3 +1,10 @@
+- name: Ensure remote media dir exists
+  file:
+    path="{{remote_media_dir}}"
+    state=directory
+    owner="{{ansible_ssh_user}}"
+  sudo: yes
+
 - name: Ensure /usr/local/bin dir exists
   file: path=/usr/local/bin state=directory
   sudo: yes
