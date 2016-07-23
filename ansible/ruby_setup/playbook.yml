@@ -10,9 +10,9 @@
     - { role: "../elixir_setup/deps" }
     - { role: "../elixir_setup/elixir" }
     - { role: "../ruby_setup/ruby" }
+    - { role: "../ruby_setup/node" }
     - { role: "../elixir_setup/ffmpeg" }
     - { role: "../elixir_setup/nginx" }
-    - nodesource.node
     - ANXS.postgresql
     - DavidWittman.redis
     - geerlingguy.memcached
