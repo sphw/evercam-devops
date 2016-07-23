@@ -9,10 +9,10 @@
   roles:
     - { role: "../elixir_setup/deps" }
     - { role: "../elixir_setup/elixir" }
+    - { role: "../ruby_setup/ruby" }
     - { role: "../elixir_setup/ffmpeg" }
     - { role: "../elixir_setup/nginx" }
     - nodesource.node
-    - rvm_io.rvm1-ruby
     - ANXS.postgresql
     - DavidWittman.redis
     - geerlingguy.memcached

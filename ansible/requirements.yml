@@ -1,4 +1,3 @@
-- src: rvm_io.rvm1-ruby
 - src: ANXS.postgresql
 - src: DavidWittman.redis
 - src: geerlingguy.memcached
