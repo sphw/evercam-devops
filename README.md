@@ -23,7 +23,7 @@ These instructions assume that you're running either Linux or OS X (Ansible does
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant](http://www.vagrantup.com/downloads.html)
 * [Python](https://www.python.org/downloads/)
-* [Ansible 1.9](http://docs.ansible.com/ansible/intro_installation.html)
+* [Ansible 2.0.1.0](http://docs.ansible.com/ansible/intro_installation.html)
 * [Git](http://git-scm.com/downloads)
 
 ##### Clone this repository and it's submodules
