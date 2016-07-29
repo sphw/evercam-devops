@@ -12,4 +12,4 @@
     - { role: jtyr.ulimit, tags: configure, sudo: yes }
     - { role: monitoring, tags: configure }
     - { role: go, tags: configure }
-    - { role: seaweedfs, tags: configure }
+    - { role: seaweedfs, tags: deploy }

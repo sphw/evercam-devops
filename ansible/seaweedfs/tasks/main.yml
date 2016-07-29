@@ -9,7 +9,7 @@
   tags: deploy,volume
 
 - name: Start SeaweedFS volume service
-  command: sudo start seaweedfs
+  command: sudo restart seaweedfs
   tags: deploy,volume
 
 - name: Add seaweedfs master service
@@ -19,5 +19,5 @@
   tags: deploy,master
 
 - name: Start SeaweedFS master service
-  command: sudo start seaweedfs
+  command: sudo restart seaweedfs
   tags: deploy,master
