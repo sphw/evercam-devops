@@ -16,3 +16,7 @@ sumologic_collector_application_log_path:
     path: "/opt/evercam_media/log/erlang.log.*"
     use_multiline: false
     category: "evercam-media"
+  - name: "seaweedfs"
+    path: "/var/log/upstart/seaweedfs.log"
+    use_multiline: false
+    category: "seaweedfs"
