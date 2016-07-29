@@ -39,3 +39,28 @@
   shell: mix local.rebar --force
   sudo_user: "{{ user_name }} -i"
   sudo: yes
+
+- name: Check if Goon is present
+  stat: path=/usr/local/bin/goon
+  register: goon_present
+
+- name: Download Goon
+  get_url:
+    url: https://github.com/alco/goon/releases/download/v1.1.1/goon_linux_amd64.tar.gz
+    dest: /tmp/goon_linux_amd64.tar.gz
+  when: goon_present.stat.exists == False
+
+- name: Unpack Goon
+  command: tar -xvzf /tmp/goon_linux_amd64.tar.gz
+  args:
+    chdir: /tmp
+    creates: /tmp/goon
+  when: goon_present.stat.exists == False
+
+- name: Add Goon to PATH
+  sudo: yes
+  command: mv /tmp/goon /usr/local/bin
+  args:
+    creates: /usr/local/bin/goon
+    removes: /tmp/goon
+  when: goon_present.stat.exists == False
