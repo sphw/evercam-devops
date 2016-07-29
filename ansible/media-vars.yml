@@ -4,7 +4,7 @@ local_media_dir: ~/evercam/evercam-media
 version_to_deploy: "{{VERSION|default('master')}}"
 
 storage_dir: /storage
-seaweedfs_path: /root/go/bin/weed
+seaweedfs_path: /opt/go/bin/weed
 
 media_env_vars: "{% for key, value in env_vars.items() %}{{key.upper()}}={{value}} {% endfor %}"
 mix_env_vars: "MIX_ENV=prod PORT=4000"

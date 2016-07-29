@@ -18,3 +18,24 @@
 - name: Set Go version using asdf
   command: "bash -lc 'asdf global golang 1.6.3'"
   sudo_user: "{{ user_name }} -i"
+
+- name: Ensure directory for GOPATH exists
+  file:
+    path: /opt/go/
+    state: directory
+
+- name: Add GOPATH to bash profile
+  lineinfile:
+    line="export GOPATH=/opt/go/"
+    dest="/root/.profile"
+    create=yes
+    owner="{{user_name}}"
+  sudo_user: "{{ user_name }} -i"
+
+- name: Add PATH to bash profile
+  lineinfile:
+    line="export PATH=$PATH:$GOPATH/bin"
+    dest="/root/.profile"
+    create=yes
+    owner="{{user_name}}"
+  sudo_user: "{{ user_name }} -i"
