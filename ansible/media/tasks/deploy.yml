@@ -50,7 +50,7 @@
 
 - name: Check if motion detection file exists
   stat:
-    path: "{{build_dir}}/priv_dir/lib_elixir_motiondetection.so"
+    path: "{{build_dir}}/priv_dir/elixir_motiondetection.so"
   register: motion_detection_file
 
 - name: Ensure priv_dir exists
@@ -58,6 +58,6 @@
   when: motion_detection_file.stat.exists == True
 
 - name: Copy motion detecion file
-  shell: "cp {{build_dir}}/priv_dir/lib_elixir_motiondetection.so {{remote_media_dir}}/priv_dir/"
+  shell: "cp {{build_dir}}/priv_dir/elixir_motiondetection.so {{remote_media_dir}}/priv_dir/"
   when: motion_detection_file.stat.exists == True
 
