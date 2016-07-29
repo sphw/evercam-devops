@@ -9,4 +9,4 @@ setuid {{user_name}}
 setgid {{user_name}}
 console log
 
-exec {{seaweedfs_path}} -v=0 server -filer=true -volume.max 500 -dir {{storage_dir}}
+exec {{seaweedfs_path}} -v 0 volume -mserver {{seaweedfs_master_ip}}:9333 -ip {{seaweedfs_volume_ip}} -dir {{storage_dir}} -max 2000 -images.fix.orientation false -pulseSeconds 1

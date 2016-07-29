@@ -1,0 +1,23 @@
+- name: Install SeaweedFS
+  command: "bash -lc 'go get github.com/chrislusf/seaweedfs/weed'"
+  tags: configure
+
+- name: Add SeaweedFS volume service
+  template:
+    src: seaweedfs-volume.conf.j2
+    dest: /etc/init/seaweedfs.conf
+  tags: deploy,volume
+
+- name: Start SeaweedFS volume service
+  command: sudo start seaweedfs
+  tags: deploy,volume
+
+- name: Add seaweedfs master service
+  template:
+    src: seaweedfs-master.conf.j2
+    dest: /etc/init/seaweedfs.conf
+  tags: deploy,master
+
+- name: Start SeaweedFS master service
+  command: sudo start seaweedfs
+  tags: deploy,master
