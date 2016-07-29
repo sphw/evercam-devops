@@ -1,9 +1,9 @@
 - name: Source asdf in bashrc
   lineinfile:
-    line="source /home/{{user_name}}/.asdf/asdf.sh"
-    dest="/home/{{user_name}}/.bash_profile"
-    create=yes
-    owner="{{user_name}}"
+    line: "source /home/{{user_name}}/.asdf/asdf.sh"
+    dest: "/home/{{user_name}}/.bash_profile"
+    create: yes
+    owner: "{{user_name}}"
   sudo_user: "{{ user_name }} -i"
 
 - name: Add asdf plugins for Go
@@ -26,16 +26,16 @@
 
 - name: Add GOPATH to bash profile
   lineinfile:
-    line="export GOPATH=/opt/go/"
-    dest="/root/.profile"
-    create=yes
-    owner="{{user_name}}"
+    line: "export GOPATH=/opt/go/"
+    dest: "/root/.profile"
+    create: yes
+    owner: "{{user_name}}"
   sudo_user: "{{ user_name }} -i"
 
 - name: Add PATH to bash profile
   lineinfile:
-    line="export PATH=$PATH:$GOPATH/bin"
-    dest="/root/.profile"
-    create=yes
-    owner="{{user_name}}"
+    line: "export PATH=$PATH:$GOPATH/bin"
+    dest: "/root/.profile"
+    create: yes
+    owner: "{{user_name}}"
   sudo_user: "{{ user_name }} -i"

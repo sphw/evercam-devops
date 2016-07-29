@@ -1,20 +1,20 @@
 - name: Deny access to port 4000
-  ufw: rule=deny port=4000
+  ufw:
+    rule: deny
+    port: 4000
 
-- name: Allow access to port 22
-  ufw: rule=allow port=22
-
-- name: Allow access to port 80
-  ufw: rule=allow port=80
-
-- name: Allow access to port 443
-  ufw: rule=allow port=443
-
-- name: Allow access to port 1935
-  ufw: rule=allow port=1935
-
-- name: Allow access to port 8080
-  ufw: rule=allow port=8080
+- name: Allow access to ports
+  ufw:
+    rule: allow
+    port: "{{item}}"
+  with_items:
+    - 22
+    - 80
+    - 443
+    - 1935
+    - 8080
 
 - name: Enable firewall
-  ufw: state=enabled
+  ufw:
+    state: enabled
+

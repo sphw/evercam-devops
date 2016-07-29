@@ -1,9 +1,9 @@
 - name: Source asdf in bashrc
   lineinfile:
-    line="source /home/{{user_name}}/.asdf/asdf.sh"
-    dest="/home/{{user_name}}/.bash_profile"
-    create=yes
-    owner="{{user_name}}"
+    line: "source /home/{{user_name}}/.asdf/asdf.sh"
+    dest: "/home/{{user_name}}/.bash_profile"
+    owner: "{{user_name}}"
+    create: yes
   sudo_user: "{{ user_name }} -i"
 
 - name: Add asdf plugins for Elixir and Erlang
@@ -41,7 +41,8 @@
   sudo: yes
 
 - name: Check if Goon is present
-  stat: path=/usr/local/bin/goon
+  stat:
+    path: /usr/local/bin/goon
   register: goon_present
 
 - name: Download Goon

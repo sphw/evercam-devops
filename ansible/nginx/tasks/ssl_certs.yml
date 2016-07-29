@@ -1,12 +1,14 @@
 - name: Check if SSL certificates are present on the local machine
   local_action: stat
-    path="{{playbook_dir}}/nginx/files/media_evercam_io.key"
+  args:
+    path: "{{playbook_dir}}/nginx/files/media_evercam_io.key"
   register: local_key
   sudo: no
 
 - name: Check if SSL certificates are present on the local machine
   local_action: stat
-    path="{{playbook_dir}}/nginx/files/media_evercam_io.pem"
+  args:
+    path: "{{playbook_dir}}/nginx/files/media_evercam_io.pem"
   register: local_cert
   sudo: no
 

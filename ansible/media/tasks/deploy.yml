@@ -6,7 +6,9 @@
   register: local_commit_hash
 
 - name: Delete build directory
-  file: path="{{build_dir}}" state=absent
+  file:
+    path: "{{build_dir}}"
+    state: absent
 
 - name: Clone evercam-media
   git:
@@ -54,10 +56,11 @@
   register: motion_detection_file
 
 - name: Ensure priv_dir exists
-  file: path="{{remote_media_dir}}/priv_dir" state=directory
+  file:
+    path: "{{remote_media_dir}}/priv_dir"
+    state: directory
   when: motion_detection_file.stat.exists == True
 
 - name: Copy motion detecion file
   shell: "cp {{build_dir}}/priv_dir/elixir_motiondetection.so {{remote_media_dir}}/priv_dir/"
   when: motion_detection_file.stat.exists == True
-

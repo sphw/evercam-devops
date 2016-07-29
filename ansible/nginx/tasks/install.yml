@@ -4,7 +4,10 @@
     dest: "/tmp/nginx-{{nginx_source_version}}.tar.gz"
 
 - name: Unpack the compressed Nginx source
-  command: tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz chdir=/tmp creates=/tmp/nginx-{{nginx_source_version}}/README
+  command: "tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz"
+  args:
+    creates: "/tmp/nginx-{{nginx_source_version}}/README"
+    chdir: /tmp
 
 - name: Download the Nginx-RTMP source release
   get_url:
@@ -12,7 +15,10 @@
     dest: "/tmp/nginx-rtmp-{{nginx_rtmp_version}}.tar.gz"
 
 - name: Unpack the compressed Nginx-RTMP source
-  command: tar -xvzf /tmp/nginx-rtmp-{{nginx_rtmp_version}}.tar.gz chdir=/tmp creates=/tmp/nginx-rtmp-{{nginx_rtmp_version}}/README
+  command: "tar -xvzf /tmp/nginx-rtmp-{{nginx_rtmp_version}}.tar.gz"
+  args:
+    creates: "/tmp/nginx-rtmp-{{nginx_rtmp_version}}/README"
+    chdir: /tmp
 
 - name: Download the Nginx More Headers source release
   get_url:
@@ -20,7 +26,10 @@
     dest: "/tmp/nginx-more-headers-{{nginx_more_headers_version}}.tar.gz"
 
 - name: Unpack the compressed Nginx More Headers source
-  command: tar -xvzf /tmp/nginx-more-headers-{{nginx_more_headers_version}}.tar.gz chdir=/tmp creates=/tmp/headers-more-nginx-module-{{nginx_more_headers_version}}/README
+  command: "tar -xvzf /tmp/nginx-more-headers-{{nginx_more_headers_version}}.tar.gz"
+  args:
+    creates: "/tmp/headers-more-nginx-module-{{nginx_more_headers_version}}/README"
+    chdir: /tmp
 
 - name: Compile the Nginx source
   shell: >

@@ -22,7 +22,8 @@
   when: nginx_version != nginx_source_version
 
 - name: Check if SSL certificates are present on the server
-  stat: path=/etc/ssl/media_evercam_io.pem
+  stat:
+    path: /etc/ssl/media_evercam_io.pem
   register: ssl_cert
 
 - include: ssl_certs.yml
@@ -36,5 +37,7 @@
   when: production == True
 
 - name: Ensure Nginx is running
-  service: name=nginx state=started
+  service:
+    name: nginx
+    state: started
   sudo: yes
