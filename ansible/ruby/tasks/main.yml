@@ -7,9 +7,7 @@
   sudo_user: "{{ user_name }} -i"
 
 - name: Add asdf plugins for Ruby
-  command: "bash -lc 'asdf plugin-add {{item}} https://github.com/HashNuke/asdf-{{item}}.git'"
-  with_items:
-    - ruby
+  command: "bash -lc 'asdf plugin-add ruby https://github.com/HashNuke/asdf-ruby.git'"
   failed_when: false
   sudo_user: "{{ user_name }} -i"
 

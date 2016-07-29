@@ -7,9 +7,7 @@
   sudo_user: "{{ user_name }} -i"
 
 - name: Add asdf plugins for Node
-  command: "bash -lc 'asdf plugin-add {{item}} https://github.com/HashNuke/asdf-{{item}}.git'"
-  with_items:
-    - nodejs
+  command: "bash -lc 'asdf plugin-add nodejs https://github.com/HashNuke/asdf-nodejs.git'"
   failed_when: false
   sudo_user: "{{ user_name }} -i"
 
@@ -17,6 +15,6 @@
   command: "bash -lc 'asdf install nodejs 6.3.1'"
   sudo_user: "{{ user_name }} -i"
 
-- name: Set Ruby version using asdf
+- name: Set Node version using asdf
   command: "bash -lc 'asdf global nodejs 6.3.1'"
   sudo_user: "{{ user_name }} -i"
