@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/evercam/evercam-devops.png?label=ready&title=Ready)](https://waffle.io/evercam/evercam-devops)
 ## Evercam Development Environment Setup
 
 This repo is used for automated provisioning and configuration of developer and production environments needed to run Evercam system. This README will explain how to setup the developer environment.
