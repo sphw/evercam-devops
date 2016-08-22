@@ -90,4 +90,4 @@ Open [http://localhost:3000/](http://localhost:3000/) in a browser and you'll se
 
 ### Documentation
 
-**All** of the Evercam documentation can be found here: https://github.com/evercam/evercam-api/wiki
+**All** of the Evercam documentation can be found here: https://github.com/evercam/evercam-media/wiki
