@@ -16,6 +16,14 @@
     dest: "{{build_dir}}/"
     version: "{{local_commit_hash.stdout}}"
 
+- name: Source asdf in bashrc
+  lineinfile:
+    line: "source /root/.asdf/asdf.sh"
+    dest: "/root/.bash_profile"
+    owner: "root"
+    create: yes
+  sudo_user: "root -i"
+
 - name: Get evercam-media dependencies
   shell: "bash -lc '{{mix_env_vars}} {{media_env_vars}} mix deps.get'"
   args:
