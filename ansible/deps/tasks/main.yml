@@ -7,6 +7,7 @@
 - name: Update apt cache
   apt:
     update_cache: yes
+  failed_when: false
   sudo: yes
 
 - name: Make sure the required packages are installed
@@ -29,7 +30,6 @@
     - libpng3
     - libpq-dev
     - libssh-dev
-    - libwxgtk2.8-dev
     - m4
     - make
     - python

@@ -1,3 +1,7 @@
+- name: Enable firewall
+  shell: "aptitude install ufw"
+  sudo: yes
+
 - name: Deny access to port 4000
   ufw:
     rule: deny

@@ -1,0 +1,23 @@
+[Unit]
+Description=evercam_media
+DefaultDependencies=no
+LimitNOFILE=1000000 1000000
+
+[Service]
+Environment=HOME=/home/{{user_name}}
+Environment=LANG=en_US.UTF-8
+Environment=LANGUAGE=en_US:en
+Environment=LS_ALL=en_US.UTF-8
+Environment=ERL_MAX_PORTS=10240
+Environment=ERL_MAX_ETS_TABLES=5000
+Environment=PORT=4000
+Environment=MIX_ENV=prod
+Environment=EVERCAM_API=https://api.evercam.io
+{% for key, value in env_vars.items() %}
+Environment={{key.upper()}}={{value}}
+{% endfor %}
+ExecStart=/usr/local/bin/run_evercam_media.sh start quiet
+ExecStop=/usr/local/bin/stop_evercam_media.sh stop
+
+[Install]
+WantedBy=multi-user.target

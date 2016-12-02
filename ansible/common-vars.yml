@@ -8,10 +8,10 @@ nginx_rtmp_url: "https://github.com/arut/nginx-rtmp-module/archive/v{{nginx_rtmp
 nginx_more_headers_version: "0.25"
 nginx_more_headers_url: "https://github.com/openresty/headers-more-nginx-module/archive/v{{nginx_more_headers_version}}.tar.gz"
 
-postgresql_version: 9.4
-postgresql_ext_postgis_version: 2.1
-postgresql_ext_install_postgis: yes
-postgresql_ext_install_contrib: yes
+postgresql_version: 9.6
+postgresql_ext_postgis_version: 2.3.1
+postgresql_ext_install_postgis: no
+postgresql_ext_install_contrib: no
 postgresql_ssl: on
 
 ulimit_config:

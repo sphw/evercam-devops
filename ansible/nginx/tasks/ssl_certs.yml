@@ -19,7 +19,7 @@
   when: production == False and local_key.stat.exists == False
 
 - name: Generate SSL certificate
-  shell: openssl req -new -x509 -key media_evercam_io.key -out media_evercam_io.pem -days 3650 -subj /CN=media.evercam.io
+  shell: openssl req -new -x509 -key media_evercam_io.key -out media_evercam_io.pem -days 3650 -subj /CN=staging.evercam.io
   args:
     chdir: "/etc/ssl/"
   when: production == False and local_key.stat.exists == False

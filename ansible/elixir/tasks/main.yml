@@ -4,7 +4,7 @@
   register: asdf_present
 
 - name: Install asdf
-  shell: git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.1.0
+  shell: git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.2.0
   sudo: yes
   when: asdf_present.stat.exists == False
 
@@ -22,7 +22,7 @@
   sudo_user: "{{ user_name }} -i"
 
 - name: Add asdf plugins for Elixir and Erlang
-  command: "bash -lc 'asdf plugin-add {{item}} https://github.com/HashNuke/asdf-{{item}}.git'"
+  command: "bash -lc 'asdf plugin-add {{item}} https://github.com/asdf-vm/asdf-{{item}}.git'"
   with_items:
     - erlang
     - elixir

@@ -1,12 +1,13 @@
 - name: Add FFMPEG repository
   apt_repository:
-    repo: 'ppa:mc3man/trusty-media'
+    repo: 'ppa:jonathonf/ffmpeg-3'
     state: present
   failed_when: false
 
 - name: Update apt cache
   apt:
     update_cache: yes
+  failed_when: false
   sudo: yes
 
 - name: Install dependencies
