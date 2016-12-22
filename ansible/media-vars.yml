@@ -12,10 +12,10 @@ sumocollector_installer_download: https://collectors.eu.sumologic.com/rest/downl
 sumologic_collector_accessid: "{{sumo_logic_id}}"
 sumologic_collector_accesskey: "{{sumo_logic_key}}"
 sumologic_collector_application_log_path:
-  - name: "evercam-media"
+  - name: "staging-evercam-media"
     path: "/opt/evercam_media/log/erlang.log.*"
     use_multiline: false
-    category: "evercam-media"
+    category: "staging-evercam-media"
   - name: "seaweedfs"
     path: "/var/log/upstart/seaweedfs.log"
     use_multiline: false
