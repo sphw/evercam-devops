@@ -43,7 +43,7 @@
 
 - name: Install asdf
   git:
-    repo: "https://github.com/HashNuke/asdf"
+    repo: "https://github.com/asdf-vm/asdf"
     dest: "/home/{{user_name}}/.asdf"
     update: yes
   sudo_user: "{{ user_name }} -i"

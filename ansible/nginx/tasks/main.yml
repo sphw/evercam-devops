@@ -23,12 +23,11 @@
 
 - name: Check if SSL certificates are present on the server
   stat:
-    path: /etc/ssl/media_evercam_io.pem
+    path: /etc/ssl/extractor_evercam_io.pem
   register: ssl_cert
 
 - include: ssl_certs.yml
   when: ssl_cert.stat.exists == False
-
 - include: config.yml
   sudo: yes
 
